@@ -8,6 +8,7 @@ https://github.com/borisachen/fftiers
 
 
 **Overview**
+
 This code is tested using Python 3.4. Some additional libraries will need to be installed for the code to run properly
 
 A clustering program that uses FantasyPros data inspired by Boris Chen (http://www.borischen.co/)
@@ -15,12 +16,14 @@ This program utilizes unsupervised machine learning by flat clustering with KMea
 to uncover like tiers within the player data mined from FantasyPros (http://www.fantasypros.com/)
 
 **To Do's**
+
 - Comment/clean code
 - Improve plot output
 - Add logging and improved cmd line stuff
 - Add sms alert when graph updated (pass/fail)
 
 **Big picture**
+
 - Make the script run continuously once a day from Raspberry Pi
   - Add local v Pi run option (save locations will differ)
   - Upload plots to site root folder
