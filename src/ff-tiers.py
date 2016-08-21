@@ -17,6 +17,8 @@ Big picture
 -Make this program work with NHL data for Fantasy Hockey
 '''
 import argparse
+import requests
+from lxml import html
 import traceback
 import os
 import logging
@@ -30,8 +32,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm
 from matplotlib import style
 style.use("ggplot")
-import requests
-from lxml import html
+
 
 
 def initialize_logging(logFile):
@@ -67,7 +68,7 @@ def verify_file_path(filePath):
     ospath = ospath.replace("\\","\\\\")
     logger.debug("Evaluating if {} exists...".format(ospath))
     if not os.path.isfile(str(ospath)):
-        logging.getLogger().critical("File not found: {}".format(filePath))
+        logger.info("File not found: {}".format(filePath))
         return False
     else:
         return True
@@ -76,35 +77,84 @@ def verify_file_path(filePath):
 def csv_from_excel(full_file_name):
     """
     converts old xls to csv using this roundabout method
-    TODO's: comment
     :param full_file_name: downloaded xls file name
     """
     logger = logging.getLogger()
-    with open(full_file_name, 'r') as xlsfile, open(full_file_name[:-4] + '.csv', 'w', newline="\n", encoding="utf-8") as csv_file:
-        xls_reader = csv.reader(xlsfile, delimiter='\t')
-        csv_writer = csv.writer(csv_file)
-        for i in range(5):
-            next(xls_reader, None)
-        for row in xls_reader:
-            csv_writer.writerow(row)
+    logger.debug("Opening xls and csv files for conversion...")
+    try:
+        if verify_file_path(full_file_name):
+            with open(full_file_name, 'r') as xlsfile, open(full_file_name[:-4] + '.csv', 'w', newline="\n", encoding="utf-8") as csv_file:
+                xls_reader = csv.reader(xlsfile, delimiter='\t')
+                csv_writer = csv.writer(csv_file)
+                # skip first five lines
+                for i in range(5):
+                    next(xls_reader, None)
+                # write subsequent rows to csv file
+                for row in xls_reader:
+                    csv_writer.writerow(row)
+                logger.debug("Conversion succeeded...")
+        else:
+            logger.info("XLS file not found for: {} Skipping file...".format(full_file_name))
+    except Exception as e:
+        logger.info("Conversion failed with: {}".format(e))
 
 
 def get_nfl_week(start_week_date):
     """
     get the nfl_week
-    TODO's: comment
     :param start_week_date: date object for Tuesday before 1st Thursday game
     :return: week: integer
     """
-    logger = logging.getLogger()
     week = 0
     today_date = datetime.datetime.now().date()
     if today_date >= start_week_date:
+        # get days passed start date as date object
         difference_days = today_date - start_week_date
+        # calculate week
         week = int((difference_days.days / 7) + 1)
         return week
     else:
         return week
+
+
+def perform_session_download(args, url, full_file_name):
+    """
+    creates a session that allows the user to log in to FantasyPros and use the tokens
+    :param args: list of parameters can be used to get data directories
+    :param url: string of the export xls url
+    :param full_file_name: string of the full file path and name of file to be saved
+    """
+    logger = logging.getLogger()
+    try:
+        # get payload values from command line parameters
+        username, password, token = args.username, args.password, args.token
+        payload = {"username": username,
+                   "password": password,
+                   "csrfmiddlewaretoken": token}
+        # start session
+        logger.debug("Starting download session...")
+        session_requests = requests.session()
+        login_url = "https://secure.fantasypros.com/accounts/login/?"
+        result = session_requests.get(login_url)
+        # refresh token on new request
+        tree = html.fromstring(result.text)
+        logger.debug("Updating token...")
+        authenticity_token = list(set(tree.xpath("//input[@name='csrfmiddlewaretoken']/@value")))[0]
+        payload["csrfmiddlewaretoken"] = authenticity_token
+        session_requests.post(login_url,
+                              data=payload,
+                              headers=dict(referer=login_url))
+        # prepare to write data to file
+        logger.debug("Opening xls file to write data...")
+        with open(full_file_name, 'wb') as handle:
+            response = session_requests.get(url)
+            if not response.ok:
+                logger.info("Writing to xls failed...")
+            for block in response.iter_content(1024):
+                handle.write(block)
+            logger.info("Writing to xls succeeded...")
+    except Exception as e:
+        logger.info("Session download failed with: {}".format(e))
 
 
 def download_nfl_data(args, week, position_list):
@@ -116,83 +166,51 @@ def download_nfl_data(args, week, position_list):
     :param position_list: list of positions to download, also used to build file names
     """
     logger = logging.getLogger()
-    download_data = args.download_data
-    username, password, token = args.username, args.password, args.token
-    if download_data == "True":
-        data_directory = args.data_directory
-        if week == 0:
-            preseason_rankings = ['https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/qb-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/rb-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/wr-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/te-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/k-cheatsheets.php?export=xls',
-                                  'https://www.fantasypros.com/nfl/rankings/dst-cheatsheets.php?export=xls']
-            preseason_rankings_names = ['week-0-preseason-overall-raw.xls',
-                                        'week-0-preseason-qb-raw.xls', 'week-0-preseason-rb-raw.xls',
-                                        'week-0-preseason-wr-raw.xls', 'week-0-preseason-te-raw.xls',
-                                        'week-0-preseason-k-raw.xls', 'week-0-preseason-dst-raw.xls']
-            for item_position in range(len(preseason_rankings)):
-                full_file_name = os.path.join(data_directory, preseason_rankings_names[item_position])
-                url = preseason_rankings[item_position]
-                payload = {
-                    "username": username,
-                    "password": password,
-                    "csrfmiddlewaretoken": token
-                }
-                session_requests = requests.session()
-                login_url = "https://secure.fantasypros.com/accounts/login/?"
-                result = session_requests.get(login_url)
-                tree = html.fromstring(result.text)
-                authenticity_token = list(set(tree.xpath("//input[@name='csrfmiddlewaretoken']/@value")))[0]
-                payload["csrfmiddlewaretoken"] = authenticity_token
-                session_requests.post(
-                    login_url,
-                    data=payload,
-                    headers=dict(referer=login_url)
-                )
-                with open(full_file_name, 'wb') as handle:
-                    response = session_requests.get(url)
-                    if not response.ok:
-                        # Something went wrong
-                        pass
-                    for block in response.iter_content(1024):
-                        handle.write(block)
-
-                csv_from_excel(full_file_name)
-        else:
-            for position in position_list:
-                filename = 'week-' + str(week) + '-' + position + '-raw.xls'
-                full_file_name = os.path.join(data_directory, filename)
-
-                url = 'http://www.fantasypros.com/nfl/rankings/' + position + '.php?export=xls'
-                payload = {
-                    "username": "whitneyjb5",
-                    "password": "999jbw",
-                    "csrfmiddlewaretoken": "reiHrx0n5o7YstOIFsZ5Gj29UVuuC80z"
-                }
-                session_requests = requests.session()
-                login_url = "https://secure.fantasypros.com/accounts/login/?next=http://www.fantasypros.com/index.php?"
-                result = session_requests.get(login_url)
-                tree = html.fromstring(result.text)
-                authenticity_token = list(set(tree.xpath("//input[@name='csrfmiddlewaretoken']/@value")))[0]
-                payload["csrfmiddlewaretoken"] = authenticity_token
-                session_requests.post(
-                    login_url,
-                    data=payload,
-                    headers=dict(referer=login_url)
-                )
-                with open(full_file_name, 'wb') as handle:
-                    response = session_requests.get(url)
-                    if not response.ok:
-                        # Something went wrong
-                        pass
-                    for block in response.iter_content(1024):
-                        handle.write(block)
-                if verify_file_path(full_file_name):
+    try:
+        download_data = args.download_data
+        if download_data == "True":
+            # get data directory from command line parameters
+            data_directory = args.data_directory
+            # if preseason
+            if week == 0:
+                preseason_rankings = ['https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/qb-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/rb-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/wr-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/te-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/k-cheatsheets.php?export=xls',
+                                      'https://www.fantasypros.com/nfl/rankings/dst-cheatsheets.php?export=xls']
+                preseason_rankings_names = ['week-0-preseason-overall-raw.xls',
+                                            'week-0-preseason-qb-raw.xls', 'week-0-preseason-rb-raw.xls',
+                                            'week-0-preseason-wr-raw.xls', 'week-0-preseason-te-raw.xls',
+                                            'week-0-preseason-k-raw.xls', 'week-0-preseason-dst-raw.xls']
+                # download each link separately
+                for item_position in range(len(preseason_rankings)):
+                    # prepare link and path/filename
+                    full_file_name = os.path.join(data_directory, preseason_rankings_names[item_position])
+                    url = preseason_rankings[item_position]
+                    # download using sessions
+                    logger.debug("Starting session download...")
+                    perform_session_download(args, url, full_file_name)
+                    # convert the xls to csv
+                    logger.debug("Starting xls conversion...")
                     csv_from_excel(full_file_name)
-                else:
-                    logger.info("XLS file not found for: {} - Week {}. Skipping position...".format(position, week))
+            # if not preseason
+            else:
+                # download each position from the position list
+                for position in position_list:
+                    # prepare link and path/filename
+                    filename = 'week-' + str(week) + '-' + position + '-raw.xls'
+                    full_file_name = os.path.join(data_directory, filename)
+                    url = 'http://www.fantasypros.com/nfl/rankings/' + position + '.php?export=xls'
+                    # download using sessions
+                    logger.debug("Starting session download...")
+                    perform_session_download(args, url, full_file_name)
+                    # convert the xls to csv
+                    logger.debug("Starting xls conversion...")
+                    csv_from_excel(full_file_name)
+    except Exception as e:
+        logger.info("Generic download and conversion failed with: {}".format(e))
 
 
 def get_position_setting(position, settings):

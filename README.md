@@ -18,6 +18,7 @@ to uncover like tiers within the player data mined from FantasyPros (http://www.
 **To run**
 
 Run from command line
+
 Note: The token can be found by searching the FantasyPros Login page source for 'csrfmiddlewaretoken'
 
 `cd "<directory_python_file>" && py -3 "ff-tiers.py" -u "<FantasyPros_username>" -p "<FantasyPros_password>" -t "<FantasyPros_token>"`
