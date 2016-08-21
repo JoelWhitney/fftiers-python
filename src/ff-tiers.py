@@ -12,6 +12,7 @@ To Do's
 
 Big picture
 -Make the script run continuously once a day from Raspberry Pi
+  -See main() method
   -Add local v Pi run option (save locations will differ)
   -Upload plots to site root folder
 -Make this program work with NHL data for Fantasy Hockey
@@ -26,6 +27,7 @@ import logging.handlers
 import datetime
 import sys
 import csv
+from threading import Timer
 import numpy as np
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -160,7 +162,6 @@ def perform_session_download(args, url, full_file_name):
 def download_nfl_data(args, week, position_list):
     """
     download xls file from fantasy pros to the data_directory specified above
-    TODO's: comment, clean up code
     :param args: list of parameters can be used to get data directories
     :param week: integer week to be used when building file names
     :param position_list: list of positions to download, also used to build file names
@@ -219,9 +220,10 @@ def get_position_setting(position, settings):
     TODO's: comment, build in preseason stuff here (see plot() TODO)
     :param position: string position of setting you want
     :param settings: list of dictionaries of settings
-    :return: max_num, k_val: positional settings for plotting
+    :returns: max_num, k_val: positional settings for plotting
     """
     logger = logging.getLogger()
+    # iterate over dictionaries until dictionary for position is found
     for dict in settings:
         if str(dict.get('pos')).lower() == str(position).lower():
             max_num = dict.get('max_num')
@@ -232,47 +234,55 @@ def get_position_setting(position, settings):
 def lists_from_csv(position, week, data_directory):
     """
     builds lists from the csv to be used in the graphing
-    TODO's: comment
     :param position: string position used for building csv name
     :param week: integer week used for building csv name
     :param data_directory: string data directory used for building csv name
-    :return: rank_list, name_list, position_list, average_rank_list, standard_deviation_list: lists of data
+    :returns: rank_list, name_list, position_list, average_rank_list, standard_deviation_list: lists of data
     """
     logger = logging.getLogger()
-    rank_list = []
-    name_list = []
-    position_list = []
-    average_rank_list = []
-    standard_deviation_list = []
-    filename = 'week-' + str(week) + '-' + position + '-raw.csv'
-    full_file_name = os.path.join(data_directory, filename)
-    print(full_file_name)
-    if verify_file_path(full_file_name):
-        with open(full_file_name, 'r') as csv_file:
-            csv_reader = csv.reader(csv_file)
-            for row in csv_reader:
-                logger.info(row)
-                rank_list.append(int(row[0]))
-                name_list.append(str(row[1]))
-                if position == 'preseason-overall':
-                    position_list.append(str(row[2]))
-                    average_rank_list.append(float(row[7]))
-                    standard_deviation_list.append(float(row[8]))
-                else:
-                    position_list.append(str(position))
-                    average_rank_list.append(float(row[6]))
-                    standard_deviation_list.append(float(row[7]))
-        return rank_list, name_list, position_list, average_rank_list, standard_deviation_list
-    else:
-        logger.info("CSV file not found for: {} - Week {}. Skipping position...".format(position, week))
+    try:
+        # set up empty lists for data storing
+        rank_list = []
+        name_list = []
+        position_list = []
+        average_rank_list = []
+        standard_deviation_list = []
+        # build path/filename for csv file
+        filename = 'week-' + str(week) + '-' + position + '-raw.csv'
+        full_file_name = os.path.join(data_directory, filename)
+        logger.debug("Trying to find csv file: {}...".format(full_file_name))
+        # verify can find file before trying to process data
+        if verify_file_path(full_file_name):
+            # set up csv file to read
+            with open(full_file_name, 'r') as csv_file:
+                csv_reader = csv.reader(csv_file)
+                # iterate over each row adding column to appropriate list
+                for row in csv_reader:
+                    rank_list.append(int(row[0]))
+                    name_list.append(str(row[1]))
+                    # preseason-overall includes position column, this accounts for it
+                    if position == 'preseason-overall':
+                        position_list.append(str(row[2]))
+                        average_rank_list.append(float(row[7]))
+                        standard_deviation_list.append(float(row[8]))
+                    # all other positions will use this
+                    else:
+                        position_list.append(str(position))
+                        average_rank_list.append(float(row[6]))
+                        standard_deviation_list.append(float(row[7]))
+            return rank_list, name_list, position_list, average_rank_list, standard_deviation_list
+        else:
+            logger.info("CSV file not found for: {} - Week {}. Skipping position...".format(position, week))
+    except Exception as e:
+        logger.info("Building lists from csv failed with: {}".format(e))
 
 
 def get_cluster_settings(week):
     """
-    helper function for geting the parameters needed for plotting
+    helper function for getting the parameters needed for plotting
     TODO's: comment, rethink this piece (maybe just return based on position instead of whole list
     :param week: int week used for getting right settings
-    :return: type_cluster_settings and ros_settings: list of dictionaries with the appropiate settings
+    :returns: type_cluster_settings and ros_settings: list of dictionaries with the appropiate settings
     """
     logger = logging.getLogger()
     # preseason clustering settings
@@ -284,7 +294,6 @@ def get_cluster_settings(week):
                                   {'pos': 'preseason-flex', 'max_num': 80, 'k_val': 14},
                                   {'pos': 'preseason-k', 'max_num': 24, 'k_val': 5},
                                   {'pos': 'preseason-dst', 'max_num': 24, 'k_val': 6}]
-
     # positional clustering settings
     weekly_pos_cluster_settings = [{'pos': 'qb', 'max_num': 24, 'k_val': 8},
                                    {'pos': 'rb', 'max_num': 40, 'k_val': 9},
@@ -304,7 +313,7 @@ def get_cluster_settings(week):
     if week == 0:
         type_cluster_settings = preseason_cluster_settings
         ros_settings = ros_pos_cluster_settings
-    elif week > 0:
+    else:
         type_cluster_settings = weekly_pos_cluster_settings
         ros_settings = ros_pos_cluster_settings
     return type_cluster_settings, ros_settings
@@ -379,55 +388,66 @@ def plot(position, week, args):
 def cluster_and_plot(list_of_lists, plot_full_file_name):
     """
     the second stage of the plotting that clusters and plots the data
-    TODO's: comment, format graph
+    TODO's: format graph
     :param list_of_lists: list of lists that has the pertinent plotting data
     :param plot_full_file_name: the file name of the plot to be saved
     """
-    list_count = 1
-    plot_file_name = plot_full_file_name[:-4]
-    for list in list_of_lists:
-        plot_full_file_name = plot_file_name + '-{}.png'.format(list_count)
-        init_list_array = []
-        rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[5]
-        for n in range(len(average_rank_list)):
-            item_list = [average_rank_list[n]]
-            init_list_array.append(item_list)
-        X = np.array(init_list_array)
-        kmeans = KMeans(n_clusters=k_value)
-        kmeans.fit(X)
-        # find the centroids and label each cluster
-        centroids = kmeans.cluster_centers_
-        labels = kmeans.labels_
-        # set up color list that will automatically cycle through
-        colors = []
-        color_cycle = iter(cm.rainbow(np.linspace(0, 5, len(labels))))
-        for i in range(len(labels)):
-            c = next(color_cycle)
-            colors.append(c)
-        for i in range(len(X)):
-            plt.errorbar(X[i][0], rank_list[i], xerr=standard_deviation_list[i], marker='.', markersize=4, color=colors[labels[i]], ecolor=colors[labels[i]])
-            position = position_list[i][10:].upper() if len(position_list[i]) > 10 else position_list[i].upper()
-            plt.text(X[i][0] + standard_deviation_list[i] + 1, rank_list[i], "{} {} ({})".format(name_list[i], position, rank_list[i]), size=6, color=colors[labels[i]],
-                     ha="left", va="center")
-        plt.gca().invert_yaxis()
-        # plt.show()
-        plt.savefig(plot_full_file_name, bbox_inches='tight')
-        plt.clf()
-        list_count += 1
-
-
-def main(args):
     logger = logging.getLogger()
-    # downloading settings
-    position_list = ['qb', 'rb', 'wr', 'te', 'flex', 'k', 'dst']
-    start_week_date = datetime.date(2016, 9, 6)
-    injured_player_list = []
-    # get week and download the data
+    try:
+        list_count = 1  # count for appending to file names (necessary for split plots)
+        plot_file_name = plot_full_file_name[:-4]  # strip .png off file name so adjustments can be made
+        # iterate over lists -- needed if plot is split into multiple
+        for list in list_of_lists:
+            # add count for split plots
+            plot_full_file_name = plot_file_name + '-{}.png'.format(list_count)
+            rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[5]
+            # empty list that will be converted into array
+            average_rank_array = []
+            for n in range(len(average_rank_list)):
+                # build list from item and append the list to the list of lists
+                item_list = [average_rank_list[n]]
+                average_rank_array.append(item_list)
+            # convert the list of lists to an array
+            X = np.array(average_rank_array)
+            # initialize KMeans and fit over the array
+            kmeans = KMeans(n_clusters=k_value)
+            kmeans.fit(X)
+            centroids = kmeans.cluster_centers_  # not used here
+            # array of labels where a cluster value is assigned to each item
+            labels = kmeans.labels_
+            # color list that will automatically generate based on number of clusters
+            colors = []
+            color_cycle = iter(cm.rainbow(np.linspace(0, 5, len(labels))))
+            for i in range(len(labels)):
+                c = next(color_cycle)
+                colors.append(c)
+            # iterate over array and plot values, standard deviation, and color by clusters
+            for i in range(len(X)):
+                plt.errorbar(X[i][0], rank_list[i], xerr=standard_deviation_list[i], marker='.', markersize=4, color=colors[labels[i]], ecolor=colors[labels[i]])
+                position = position_list[i][10:].upper() if len(position_list[i]) > 10 else position_list[i].upper()
+                plt.text(X[i][0] + standard_deviation_list[i] + 1, rank_list[i], "{} {} ({})".format(name_list[i], position, rank_list[i]), size=6, color=colors[labels[i]],
+                         ha="left", va="center")
+            plt.gca().invert_yaxis()  # top-left of graph should start at 1
+            # plt.show()
+            plt.savefig(plot_full_file_name, bbox_inches='tight')  # save the png file
+            plt.clf()  # clear plot after use otherwise subsequent iterations
+            list_count += 1
+    except Exception as e:
+        logger.info("Clustering and plotting failed with: {}".format(e))
+
+
+def clustering_program(args, start_week_date, position_list):
+    """
+    adjusts the position list based on if preseason or not then runs program
+    :param args: list of parameters can be used to get data and plot directories
+    :param start_week_date: date object for start of season
+    :param position_list: list of positions to be used
+    """
     week = get_nfl_week(start_week_date)
-    print(week)
+    adjust_position_list = position_list
     if week == 0:
-        position_list.remove('flex')
-        position_list.insert(0, 'overall')
+        adjust_position_list.remove('flex')
+        adjust_position_list.insert(0, 'overall')
         download_nfl_data(args, week, position_list)
         for pos in position_list:
             preseason_pos = 'preseason-{}'.format(pos)
@@ -436,6 +456,27 @@ def main(args):
         download_nfl_data(args, week, position_list)
         for pos in position_list:
             plot(pos, week, args)
+
+
+def main(args):
+    logger = logging.getLogger()
+    # downloading settings
+    position_list = ['qb', 'rb', 'wr', 'te', 'flex', 'k', 'dst']
+    start_week_date = datetime.date(2016, 9, 6)
+    injured_player_list = []
+    clustering_program(args, start_week_date, position_list)
+
+    # # start loop
+    # while True:
+    #     # get timer components
+    #     x = datetime.datetime.now()
+    #     y = x.replace(day=x.day + 1, hour=23, minute=40, second=0, microsecond=0)
+    #     delta_t = y - x
+    #     secs = delta_t.seconds + 1
+    #     print(secs)
+    #     # after secs is up run the program
+    #     t = Timer(secs, clustering_program(args, start_week_date, position_list))
+    #     t.start()
 
 
 if __name__ == "__main__":    # get all of the commandline arguments
