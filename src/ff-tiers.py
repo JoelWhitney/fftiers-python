@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 __author__ = 'joelwhitney'
 '''
 A clustering program that uses FantasyPros data inspired by Boris Chen (http://www.borischen.co/)
@@ -6,6 +8,7 @@ to uncover like tiers within the player data mined from FantasyPros (http://www.
 
 To Do's
 -Comment/clean code
+-Output to CSV with tiers (preseason is key now)
 -Improve plot output
 -Add logging and improved cmd line stuff
 -Add sms alert when graph updated (pass/fail)
@@ -16,6 +19,8 @@ Big picture
   -Add local v Pi run option (save locations will differ)
   -Upload plots to site root folder
 -Make this program work with NHL data for Fantasy Hockey
+-Spit out a webpage like this (http://www.ffbcheatsheet.info/)
+  -Color by tiers; Outline by position
 '''
 import argparse
 import requests
@@ -34,7 +39,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm
 from matplotlib import style
 style.use("ggplot")
-
+import time
 
 
 def initialize_logging(logFile):
@@ -286,7 +291,7 @@ def get_cluster_settings(week):
     """
     logger = logging.getLogger()
     # preseason clustering settings
-    preseason_cluster_settings = [{'pos': 'preseason-overall', 'plot1': 70, 'k_val_1': 10, 'plot2': 70, 'k_val_2': 8, 'plot3': 70, 'k_val_3': 8},
+    preseason_cluster_settings = [{'pos': 'preseason-overall', 'plot1': 60, 'k_val_1': 10, 'plot2': 60, 'k_val_2': 8, 'plot3': 80, 'k_val_3': 8},
                                   {'pos': 'preseason-qb', 'max_num': 24, 'k_val': 8},
                                   {'pos': 'preseason-rb', 'max_num': 40, 'k_val': 9},
                                   {'pos': 'preseason-wr', 'max_num': 60, 'k_val': 12},
@@ -321,7 +326,7 @@ def get_cluster_settings(week):
 
 def plot(position, week, args):
     """
-    the first stage of the plotting that prepares the data to then be cluster_and_plot'ed
+    the first stage of the plotting that prepares the data to then be cluster_and_plotted
     TODO's: comment, utilize get_position_settings for preseason data
     :param position: string position used for getting data and position settings for the plotting
     :param week: integer week used for getting data
@@ -331,6 +336,8 @@ def plot(position, week, args):
     filename = 'week-' + str(week) + '-' + position + '-raw.png'
     plots_directory = args.plots_directory
     plot_full_file_name = os.path.join(plots_directory, filename)
+    title = "Preseason - {} Tiers - {}".format(position[10:].upper(), time.strftime("%Y-%m-%d %H:%M")) if week == 0 else \
+        "Week {} - {} Tiers - {}".format(week, position.upper(), time.strftime("%Y-%m-%d %H:%M"))
     data_directory = args.data_directory
     # get the cluster settings
     type_cluster_settings, ros_cluster_settings = get_cluster_settings(week)
@@ -341,10 +348,10 @@ def plot(position, week, args):
         if position == 'preseason-overall':
             for dict in type_cluster_settings:
                 if dict.get('pos') == 'preseason-overall':
-                    start1, stop1 = 0, 0 + dict.get('plot1')
-                    start2 = stop1 + 1
+                    start1, stop1 = 0, dict.get('plot1')
+                    start2 = stop1
                     stop2 = start2 + dict.get('plot2')
-                    start3 = stop2 + 1
+                    start3 = stop2
                     stop3 = start3 + dict.get('plot3')
                     rank_list_1, name_list_1, position_list1, average_rank_list_1, standard_deviation_list_1 = rank_list[start1: stop1], \
                                                                                                                name_list[start1: stop1], \
@@ -365,9 +372,18 @@ def plot(position, week, args):
                                                       dict.get('k_val_2'), \
                                                       dict.get('k_val_3')
                     list_of_lists1 = [[rank_list_1, name_list_1, position_list1, average_rank_list_1, standard_deviation_list_1, k_value_1],
-                                     [rank_list_2, name_list_2, position_list2, average_rank_list_2, standard_deviation_list_2, k_value_2],
-                                     [rank_list_3, name_list_3, position_list3, average_rank_list_3, standard_deviation_list_3, k_value_3]]
-                    cluster_and_plot(list_of_lists1, plot_full_file_name)
+                                      [rank_list_2, name_list_2, position_list2, average_rank_list_2, standard_deviation_list_2, k_value_2],
+                                      [rank_list_3, name_list_3, position_list3, average_rank_list_3, standard_deviation_list_3, k_value_3]]
+                    labels = cluster_and_plot(list_of_lists1, plot_full_file_name, title)
+                    # create draft sheet
+                    unordered_labels = [labels[start1:stop1], labels[start2:stop2], labels[start3:stop3]]
+                    ordered_labels = reorder_labels(unordered_labels)
+                    ordered_test = [ordered_labels[start1:stop1], ordered_labels[start2:stop2], ordered_labels[start3:stop3]]
+                    print(unordered_labels)
+                    print(ordered_labels)
+
+                    list_of_lists1 = [rank_list[start1:stop3], name_list[start1:stop3], position_list[start1:stop3], average_rank_list[start1:stop3], ordered_labels]
+                    ffb_draft_sheet(args, list_of_lists1)
         else:
             max_number, k_value = get_position_setting(position, type_cluster_settings)
             rank_list, name_list, position_list, average_rank_list, standard_deviation_list = rank_list[0:max_number], \
@@ -376,16 +392,16 @@ def plot(position, week, args):
                                                                                               average_rank_list[0:max_number], \
                                                                                               standard_deviation_list[0:max_number]
             list_of_lists2 = [[rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value]]
-            cluster_and_plot(list_of_lists2, plot_full_file_name)
+            cluster_and_plot(list_of_lists2, plot_full_file_name, title)
     else:
         # get settings for weekly plots
         max_number, k_value = get_position_setting(position, type_cluster_settings)
         rank_list, name_list, position_list, average_rank_list, standard_deviation_list = lists_from_csv(position, week=week, data_directory=data_directory)
         list_of_lists = [[rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value]]
-        cluster_and_plot(list_of_lists, plot_full_file_name)
+        cluster_and_plot(list_of_lists, plot_full_file_name, title)
 
 
-def cluster_and_plot(list_of_lists, plot_full_file_name):
+def cluster_and_plot(list_of_lists, plot_full_file_name, title):
     """
     the second stage of the plotting that clusters and plots the data
     TODO's: format graph
@@ -415,6 +431,11 @@ def cluster_and_plot(list_of_lists, plot_full_file_name):
             centroids = kmeans.cluster_centers_  # not used here
             # array of labels where a cluster value is assigned to each item
             labels = kmeans.labels_
+            if list_count == 1:
+                labels_copy = labels
+            else:
+                labels_copy = np.concatenate((labels_copy, labels))
+                print(len(labels_copy))
             # color list that will automatically generate based on number of clusters
             colors = []
             color_cycle = iter(cm.rainbow(np.linspace(0, 5, len(labels))))
@@ -427,11 +448,21 @@ def cluster_and_plot(list_of_lists, plot_full_file_name):
                 position = position_list[i][10:].upper() if len(position_list[i]) > 10 else position_list[i].upper()
                 plt.text(X[i][0] + standard_deviation_list[i] + 1, rank_list[i], "{} {} ({})".format(name_list[i], position, rank_list[i]), size=6, color=colors[labels[i]],
                          ha="left", va="center")
+            axes = plt.gca()
+            axes.set_axis_bgcolor('#3A3A3A')
+
+            plt.rcParams['savefig.facecolor'] = '#151515'
+
+            plt.title(title, color='white')
+            plt.xlabel('Average Ranking', color='white')
+            plt.ylabel('Expert Consensus Ranking', color='white')
+
             plt.gca().invert_yaxis()  # top-left of graph should start at 1
             # plt.show()
             plt.savefig(plot_full_file_name, bbox_inches='tight')  # save the png file
             plt.clf()  # clear plot after use otherwise subsequent iterations
             list_count += 1
+        return labels_copy
     except Exception as e:
         logger.info("Clustering and plotting failed with: {}".format(e))
 
@@ -456,6 +487,78 @@ def clustering_program(args, start_week_date, position_list):
         download_nfl_data(args, week, position_list)
         for pos in position_list:
             plot(pos, week, args)
+
+
+def reorder_labels(unordered_labels):
+    """
+    orders the unordered labels from clustering algorithm
+    :param unordered_labels: list of arrays
+    :return: ordered_labels: list of integers that match pattern of before
+    """
+    starting_label = 0
+    ordered_labels = []
+    # for each array go through items
+    for array in unordered_labels:
+        print(len(array))
+        starting_label += 1
+        array_dictionary = {}
+        item_values = list(OrderedDict.fromkeys(array))
+        print(item_values)
+        for i in range(len(item_values)):
+            current_label = starting_label + i
+            array_dictionary[item_values[i]] = current_label
+        print(array_dictionary)
+        starting_label = current_label
+        # for each item in array
+        for label in array:
+            ordered_labels.append(array_dictionary.get(label))
+    print(len(ordered_labels))
+    return ordered_labels
+
+
+def ffb_draft_sheet(args, list_of_lists):
+    tophalf_html = args.html_directory + "_tophalf_html.text"
+    bottomhalf_html = args.html_directory + "_bottomhalf_html.text"
+    destination_html = args.html_directory + "FantasyFootballDraftSheet.html"
+    with open(tophalf_html, 'r') as tophalf_html_file, open(bottomhalf_html, 'r') as bottomhalf_html_file, open(destination_html, 'w') as destination_html_file:
+        # write top half stuff
+        tophalf_html_contents = tophalf_html_file.read()
+        destination_html_file.write(tophalf_html_contents)
+
+        position_images = {'QB': "images/quarterbackbt.png", 'RB': "images/runningbackbt.png", 'WR' : "images/receiverbt.png",
+                           'TE': "images/tightendbt.png", 'DST': "images/defensebt.png", 'K': "images/kickerbt.png"}
+
+        # do other stuff
+        div_start = '\t\t\t\t<div class="col-xs-12 col-lg-2 rowpadsmall"> \n\t\t\t\t\t <ul class="list1"> \n'
+        div_stop = '\t\t\t\t\t </ul> \n\t\t\t </div> \n'
+
+        num_players = len(list_of_lists[0])
+        players_per_column = 35
+        starts = []
+        for e in range(6): starts.append(int(e * players_per_column))
+        stops = []
+        for f in range(6): stops.append(starts[f] + players_per_column)
+
+        for i in range(6):
+            destination_html_file.write(div_start)
+            rank_list, name_list, position_list, average_rank_list, ordered_labels = list_of_lists[0][starts[i]:stops[i]], \
+                                                                                     list_of_lists[1][starts[i]:stops[i]], \
+                                                                                     list_of_lists[2][starts[i]:stops[i]], \
+                                                                                     list_of_lists[3][starts[i]:stops[i]], \
+                                                                                     list_of_lists[4][starts[i]:stops[i]]
+            print(name_list)
+            for n in range(len(rank_list)):
+                formatted_ranking = float("{0:.2f}".format(average_rank_list[n]))
+                raw_position = ''.join([i for i in position_list[n] if not i.isdigit()])
+                position_rank = ''.join([i for i in position_list[n] if i.isdigit()])
+                position_image = position_images.get(raw_position)
+                player_info = '\t\t\t\t\t\t\t\t<li class="listitem1"><img src={} height=20px><small class="grey"> (T{}) {}&nbsp;</small><a style=' \
+                              '"cursor: pointer;"> {}</a><small class="grey"> {}-{}</small> <a href="#" class="" fp-player-name="{}"></a></li>\n'.format(position_image, ordered_labels[n], formatted_ranking, name_list[n],  raw_position, position_rank, name_list[n])
+                destination_html_file.write(player_info)
+            destination_html_file.write(div_stop)
+        # write bottom half
+        bottomhalf_html_contents = bottomhalf_html_file.read()
+        destination_html_file.write(bottomhalf_html_contents)
 
 
 def main(args):
@@ -489,6 +592,7 @@ if __name__ == "__main__":    # get all of the commandline arguments
     parser.add_argument('-down', dest='download_data', help="Boolean for if script should download data", default="True")
     parser.add_argument('-dat', dest='data_directory', help="The directory where the data is downloaded", default="data/fftiers/2016/")
     parser.add_argument('-plot', dest='plots_directory', help="The directory where the plots are saved", default="plots/fftiers/2016/")
+    parser.add_argument('-html', dest='html_directory', help="The directory where the FFBDraftSheet html is saved", default="ffb/")
     # required for logging
     parser.add_argument('-logFile', dest='logFile', help='The log file to use', default="log.txt")
     args = parser.parse_args()
