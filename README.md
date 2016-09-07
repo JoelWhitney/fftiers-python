@@ -24,15 +24,12 @@ Note: The token can be found by searching the FantasyPros Login page source for 
 `cd "<directory_python_file>" && py -3 "ff-tiers.py" -u "<FantasyPros_username>" -p "<FantasyPros_password>" -t "<FantasyPros_token>"`
 
 **To do**
-
-- Comment/clean code
-- Improve plot output
-- Add logging and improved cmd line stuff
+- Output to CSV with tiers
 - Add sms alert when graph updated (pass/fail)
-
-**Big picture**
-
-- Make the script run continuously once a day from Raspberry Pi
-  - Add local v Pi run option (save locations will differ)
-  - Upload plots to site root folder
+- Make the script run continuously once a day
+  - cPanel in cgi?
+  - from Raspberry Pi
+    - upload to site from here?
+  - Add local v auto run option
+    - once v timed runtime
 - Make this program work with NHL data for Fantasy Hockey
