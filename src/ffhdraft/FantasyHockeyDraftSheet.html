@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<title>Fantasy Hockey Draft Sheet</title>
+ 		<!-- Required meta tags always come first -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.hideseek.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="draftsheet.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-dark bg-inverse">
+  		<!-- Navbar content -->
+			<a style="color: white; font-weight: bold;">Fantasy Hockey Draft Sheet</a>
+		</nav>
+		<header>
+			</br></br>
+			</br></br>
+			</br></br>
+		</header>
+
+		<div class="container-fluid positionsbar" id="wrap">
+			<div class="row">
+				<div class="positionbts">
+					<ul>
+						<li><img class="buttonspos centerbt" src="images/centerbt.png"></li>
+						<li><img class="buttonspos leftwingbt" src="images/leftwingbt.png"></li>
+						<li><img class="buttonspos rightwingbt" src="images/rightwingbt.png"></li>
+						<li><img class="buttonspos defensebt" src="images/defensebt.png"></li>
+						<li><img class="buttonspos goaliebt" src="images/goaliebt.png"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="tab">
+		          <li><a href="#" class="tablinks active" onclick="openCity(event, 'Draft Sheet')">Draft Sheet</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'About')">About</a></li>
+		        </ul>
+		        <ul class="tab">
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'Overall')">Overall</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'C')">C</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'LW')">LW</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'RW')">RW</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'D')">D</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'G')">G</a></li>
+		        </ul>
+		    </div>
+		</div>
+        <div id="Draft Sheet" class="tabcontent" style="display: block;">
+			<div class="container-fluid">
+                <div class="row">				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T1) 1.8&nbsp;</small><a style="cursor: pointer;"> Patrick Kane</a><small class="grey"> RW (stdDev: 0.75)</small> <a href="#" class="" fp-player-name="Patrick Kane"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T1) 2.8&nbsp;</small><a style="cursor: pointer;"> Sidney Crosby</a><small class="grey"> C (stdDev: 0.75)</small> <a href="#" class="" fp-player-name="Sidney Crosby"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T1) 3.4&nbsp;</small><a style="cursor: pointer;"> Jamie Benn</a><small class="grey"> LW (stdDev: 1.2)</small> <a href="#" class="" fp-player-name="Jamie Benn"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T1) 3.8&nbsp;</small><a style="cursor: pointer;"> Alex Ovechkin</a><small class="grey"> LW (stdDev: 4.17)</small> <a href="#" class="" fp-player-name="Alex Ovechkin"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T2) 8.0&nbsp;</small><a style="cursor: pointer;"> Connor McDavid</a><small class="grey"> C (stdDev: 2.83)</small> <a href="#" class="" fp-player-name="Connor McDavid"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T2) 8.6&nbsp;</small><a style="cursor: pointer;"> Joe Pavelski</a><small class="grey"> C (stdDev: 2.24)</small> <a href="#" class="" fp-player-name="Joe Pavelski"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T2) 9.2&nbsp;</small><a style="cursor: pointer;"> Erik Karlsson</a><small class="grey"> D (stdDev: 4.12)</small> <a href="#" class="" fp-player-name="Erik Karlsson"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T2) 9.4&nbsp;</small><a style="cursor: pointer;"> Vladimir Tarasenko</a><small class="grey"> RW (stdDev: 2.5)</small> <a href="#" class="" fp-player-name="Vladimir Tarasenko"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T2) 10.6&nbsp;</small><a style="cursor: pointer;"> Brent Burns</a><small class="grey"> D (stdDev: 2.8)</small> <a href="#" class="" fp-player-name="Brent Burns"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T2) 11.0&nbsp;</small><a style="cursor: pointer;"> Braden Holtby</a><small class="grey"> G (stdDev: 4.34)</small> <a href="#" class="" fp-player-name="Braden Holtby"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T2) 11.4&nbsp;</small><a style="cursor: pointer;"> Tyler Seguin</a><small class="grey"> C (stdDev: 6.41)</small> <a href="#" class="" fp-player-name="Tyler Seguin"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T3) 13.0&nbsp;</small><a style="cursor: pointer;"> Carey Price</a><small class="grey"> G (stdDev: 5.48)</small> <a href="#" class="" fp-player-name="Carey Price"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T3) 14.0&nbsp;</small><a style="cursor: pointer;"> Johnny Gaudreau</a><small class="grey"> LW (stdDev: 6.39)</small> <a href="#" class="" fp-player-name="Johnny Gaudreau"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T3) 15.2&nbsp;</small><a style="cursor: pointer;"> Steven Stamkos</a><small class="grey"> C (stdDev: 7.76)</small> <a href="#" class="" fp-player-name="Steven Stamkos"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T3) 15.2&nbsp;</small><a style="cursor: pointer;"> John Tavares</a><small class="grey"> C (stdDev: 3.97)</small> <a href="#" class="" fp-player-name="John Tavares"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T4) 19.2&nbsp;</small><a style="cursor: pointer;"> Ben Bishop</a><small class="grey"> G (stdDev: 6.79)</small> <a href="#" class="" fp-player-name="Ben Bishop"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T4) 21.2&nbsp;</small><a style="cursor: pointer;"> Evgeni Malkin</a><small class="grey"> C (stdDev: 6.37)</small> <a href="#" class="" fp-player-name="Evgeni Malkin"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T4) 22.2&nbsp;</small><a style="cursor: pointer;"> Claude Giroux</a><small class="grey"> RW (stdDev: 8.59)</small> <a href="#" class="" fp-player-name="Claude Giroux"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T4) 23.0&nbsp;</small><a style="cursor: pointer;"> Nikita Kucherov</a><small class="grey"> RW (stdDev: 8.94)</small> <a href="#" class="" fp-player-name="Nikita Kucherov"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T4) 24.2&nbsp;</small><a style="cursor: pointer;"> Jonathan Quick</a><small class="grey"> G (stdDev: 9.6)</small> <a href="#" class="" fp-player-name="Jonathan Quick"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T5) 25.8&nbsp;</small><a style="cursor: pointer;"> P.K. Subban</a><small class="grey"> D (stdDev: 11.16)</small> <a href="#" class="" fp-player-name="P.K. Subban"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T5) 26.4&nbsp;</small><a style="cursor: pointer;"> Evgeny Kuznetsov</a><small class="grey"> C (stdDev: 6.22)</small> <a href="#" class="" fp-player-name="Evgeny Kuznetsov"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T5) 26.4&nbsp;</small><a style="cursor: pointer;"> Artemi Panarin</a><small class="grey"> LW (stdDev: 8.52)</small> <a href="#" class="" fp-player-name="Artemi Panarin"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T5) 26.6&nbsp;</small><a style="cursor: pointer;"> Patrice Bergeron</a><small class="grey"> C (stdDev: 8.04)</small> <a href="#" class="" fp-player-name="Patrice Bergeron"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T5) 26.6&nbsp;</small><a style="cursor: pointer;"> Dustin Byfuglien</a><small class="grey"> D (stdDev: 7.09)</small> <a href="#" class="" fp-player-name="Dustin Byfuglien"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T5) 26.8&nbsp;</small><a style="cursor: pointer;"> Corey Perry</a><small class="grey"> RW (stdDev: 3.87)</small> <a href="#" class="" fp-player-name="Corey Perry"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T5) 27.4&nbsp;</small><a style="cursor: pointer;"> Martin Jones</a><small class="grey"> G (stdDev: 11.71)</small> <a href="#" class="" fp-player-name="Martin Jones"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T5) 27.4&nbsp;</small><a style="cursor: pointer;"> Anze Kopitar</a><small class="grey"> C (stdDev: 5.95)</small> <a href="#" class="" fp-player-name="Anze Kopitar"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T5) 28.4&nbsp;</small><a style="cursor: pointer;"> Nicklas Backstrom</a><small class="grey"> C (stdDev: 4.72)</small> <a href="#" class="" fp-player-name="Nicklas Backstrom"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T6) 29.8&nbsp;</small><a style="cursor: pointer;"> Cory Schneider</a><small class="grey"> G (stdDev: 12.22)</small> <a href="#" class="" fp-player-name="Cory Schneider"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T6) 30.4&nbsp;</small><a style="cursor: pointer;"> Kris Letang</a><small class="grey"> D (stdDev: 11.6)</small> <a href="#" class="" fp-player-name="Kris Letang"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T6) 30.6&nbsp;</small><a style="cursor: pointer;"> Corey Crawford</a><small class="grey"> G (stdDev: 8.04)</small> <a href="#" class="" fp-player-name="Corey Crawford"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T6) 32.4&nbsp;</small><a style="cursor: pointer;"> Joe Thornton</a><small class="grey"> C (stdDev: 10.63)</small> <a href="#" class="" fp-player-name="Joe Thornton"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T6) 32.8&nbsp;</small><a style="cursor: pointer;"> Blake Wheeler</a><small class="grey"> RW (stdDev: 6.05)</small> <a href="#" class="" fp-player-name="Blake Wheeler"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T7) 35.0&nbsp;</small><a style="cursor: pointer;"> Wayne Simmonds</a><small class="grey"> RW (stdDev: 14.57)</small> <a href="#" class="" fp-player-name="Wayne Simmonds"></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T7) 36.0&nbsp;</small><a style="cursor: pointer;"> Filip Forsberg</a><small class="grey"> LW (stdDev: 10.2)</small> <a href="#" class="" fp-player-name="Filip Forsberg"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T7) 38.4&nbsp;</small><a style="cursor: pointer;"> Ryan Getzlaf</a><small class="grey"> C (stdDev: 9.07)</small> <a href="#" class="" fp-player-name="Ryan Getzlaf"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T7) 38.8&nbsp;</small><a style="cursor: pointer;"> Oliver Ekman-Larsson</a><small class="grey"> D (stdDev: 16.38)</small> <a href="#" class="" fp-player-name="Oliver Ekman-Larsson"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T8) 42.8&nbsp;</small><a style="cursor: pointer;"> Pekka Rinne</a><small class="grey"> G (stdDev: 9.87)</small> <a href="#" class="" fp-player-name="Pekka Rinne"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T8) 43.0&nbsp;</small><a style="cursor: pointer;"> Drew Doughty</a><small class="grey"> D (stdDev: 8.32)</small> <a href="#" class="" fp-player-name="Drew Doughty"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T8) 43.2&nbsp;</small><a style="cursor: pointer;"> Phil Kessel</a><small class="grey"> RW (stdDev: 8.33)</small> <a href="#" class="" fp-player-name="Phil Kessel"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T8) 44.2&nbsp;</small><a style="cursor: pointer;"> Taylor Hall</a><small class="grey"> LW (stdDev: 15.43)</small> <a href="#" class="" fp-player-name="Taylor Hall"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T8) 44.4&nbsp;</small><a style="cursor: pointer;"> Roman Josi</a><small class="grey"> D (stdDev: 7.45)</small> <a href="#" class="" fp-player-name="Roman Josi"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T8) 45.6&nbsp;</small><a style="cursor: pointer;"> Max Pacioretty</a><small class="grey"> LW (stdDev: 14.32)</small> <a href="#" class="" fp-player-name="Max Pacioretty"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T8) 45.8&nbsp;</small><a style="cursor: pointer;"> James Neal</a><small class="grey"> LW (stdDev: 8.93)</small> <a href="#" class="" fp-player-name="James Neal"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T8) 46.4&nbsp;</small><a style="cursor: pointer;"> Henrik Lundqvist</a><small class="grey"> G (stdDev: 16.45)</small> <a href="#" class="" fp-player-name="Henrik Lundqvist"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T8) 47.4&nbsp;</small><a style="cursor: pointer;"> Jack Eichel</a><small class="grey"> C (stdDev: 12.55)</small> <a href="#" class="" fp-player-name="Jack Eichel"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T9) 49.6&nbsp;</small><a style="cursor: pointer;"> Brad Marchand</a><small class="grey"> LW (stdDev: 8.96)</small> <a href="#" class="" fp-player-name="Brad Marchand"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T9) 51.0&nbsp;</small><a style="cursor: pointer;"> Daniel Sedin</a><small class="grey"> LW (stdDev: 7.18)</small> <a href="#" class="" fp-player-name="Daniel Sedin"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T9) 53.8&nbsp;</small><a style="cursor: pointer;"> Shayne Gostisbehere</a><small class="grey"> D (stdDev: 5.78)</small> <a href="#" class="" fp-player-name="Shayne Gostisbehere"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T9) 54.0&nbsp;</small><a style="cursor: pointer;"> Logan Couture</a><small class="grey"> C (stdDev: 18.74)</small> <a href="#" class="" fp-player-name="Logan Couture"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T10) 55.8&nbsp;</small><a style="cursor: pointer;"> John Gibson</a><small class="grey"> G (stdDev: 10.05)</small> <a href="#" class="" fp-player-name="John Gibson"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T10) 56.2&nbsp;</small><a style="cursor: pointer;"> Sean Monahan</a><small class="grey"> C (stdDev: 19.09)</small> <a href="#" class="" fp-player-name="Sean Monahan"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T10) 57.2&nbsp;</small><a style="cursor: pointer;"> Jonathan Toews</a><small class="grey"> C (stdDev: 13.14)</small> <a href="#" class="" fp-player-name="Jonathan Toews"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T10) 58.4&nbsp;</small><a style="cursor: pointer;"> Tyler Toffoli</a><small class="grey"> C (stdDev: 11.71)</small> <a href="#" class="" fp-player-name="Tyler Toffoli"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T10) 58.4&nbsp;</small><a style="cursor: pointer;"> Mark Scheifele</a><small class="grey"> C (stdDev: 8.69)</small> <a href="#" class="" fp-player-name="Mark Scheifele"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T10) 59.4&nbsp;</small><a style="cursor: pointer;"> Aleksander Barkov</a><small class="grey"> C (stdDev: 21.27)</small> <a href="#" class="" fp-player-name="Aleksander Barkov"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T10) 59.4&nbsp;</small><a style="cursor: pointer;"> John Klingberg</a><small class="grey"> D (stdDev: 8.33)</small> <a href="#" class="" fp-player-name="John Klingberg"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T10) 60.2&nbsp;</small><a style="cursor: pointer;"> Jake Allen</a><small class="grey"> G (stdDev: 14.51)</small> <a href="#" class="" fp-player-name="Jake Allen"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T10) 61.2&nbsp;</small><a style="cursor: pointer;"> Mark Giordano</a><small class="grey"> D (stdDev: 11.89)</small> <a href="#" class="" fp-player-name="Mark Giordano"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T11) 66.4&nbsp;</small><a style="cursor: pointer;"> John Carlson</a><small class="grey"> D (stdDev: 25.96)</small> <a href="#" class="" fp-player-name="John Carlson"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T11) 65.6&nbsp;</small><a style="cursor: pointer;"> Tuukka Rask</a><small class="grey"> G (stdDev: 21.88)</small> <a href="#" class="" fp-player-name="Tuukka Rask"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T11) 65.2&nbsp;</small><a style="cursor: pointer;"> Zach Parise</a><small class="grey"> LW (stdDev: 10.07)</small> <a href="#" class="" fp-player-name="Zach Parise"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T11) 65.4&nbsp;</small><a style="cursor: pointer;"> Ryan Johansen</a><small class="grey"> C (stdDev: 13.51)</small> <a href="#" class="" fp-player-name="Ryan Johansen"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T11) 66.2&nbsp;</small><a style="cursor: pointer;"> Jonathan Huberdeau</a><small class="grey"> C (stdDev: 5.84)</small> <a href="#" class="" fp-player-name="Jonathan Huberdeau"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T11) 66.6&nbsp;</small><a style="cursor: pointer;"> Alexander Steen</a><small class="grey"> LW (stdDev: 4.76)</small> <a href="#" class="" fp-player-name="Alexander Steen"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T11) 66.8&nbsp;</small><a style="cursor: pointer;"> Shea Weber</a><small class="grey"> D (stdDev: 16.14)</small> <a href="#" class="" fp-player-name="Shea Weber"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T12) 70.6&nbsp;</small><a style="cursor: pointer;"> Brian Elliott</a><small class="grey"> G (stdDev: 8.4)</small> <a href="#" class="" fp-player-name="Brian Elliott"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T12) 71.0&nbsp;</small><a style="cursor: pointer;"> Nathan MacKinnon</a><small class="grey"> C (stdDev: 21.16)</small> <a href="#" class="" fp-player-name="Nathan MacKinnon"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T12) 71.0&nbsp;</small><a style="cursor: pointer;"> Jason Spezza</a><small class="grey"> C (stdDev: 14.62)</small> <a href="#" class="" fp-player-name="Jason Spezza"></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T12) 71.2&nbsp;</small><a style="cursor: pointer;"> Patric Hornqvist</a><small class="grey"> RW (stdDev: 11.91)</small> <a href="#" class="" fp-player-name="Patric Hornqvist"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T12) 73.6&nbsp;</small><a style="cursor: pointer;"> Roberto Luongo</a><small class="grey"> G (stdDev: 15.38)</small> <a href="#" class="" fp-player-name="Roberto Luongo"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T12) 74.4&nbsp;</small><a style="cursor: pointer;"> Victor Hedman</a><small class="grey"> D (stdDev: 17.74)</small> <a href="#" class="" fp-player-name="Victor Hedman"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T12) 75.8&nbsp;</small><a style="cursor: pointer;"> Jeff Carter</a><small class="grey"> C (stdDev: 13.88)</small> <a href="#" class="" fp-player-name="Jeff Carter"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T13) 79.8&nbsp;</small><a style="cursor: pointer;"> T.J. Oshie</a><small class="grey"> RW (stdDev: 14.06)</small> <a href="#" class="" fp-player-name="T.J. Oshie"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T13) 79.4&nbsp;</small><a style="cursor: pointer;"> Duncan Keith</a><small class="grey"> D (stdDev: 9.75)</small> <a href="#" class="" fp-player-name="Duncan Keith"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T13) 80.0&nbsp;</small><a style="cursor: pointer;"> Jakub Voracek</a><small class="grey"> RW (stdDev: 14.81)</small> <a href="#" class="" fp-player-name="Jakub Voracek"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T13) 80.0&nbsp;</small><a style="cursor: pointer;"> Milan Lucic</a><small class="grey"> LW (stdDev: 6.07)</small> <a href="#" class="" fp-player-name="Milan Lucic"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T13) 84.6&nbsp;</small><a style="cursor: pointer;"> Devan Dubnyk</a><small class="grey"> G (stdDev: 20.3)</small> <a href="#" class="" fp-player-name="Devan Dubnyk"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T14) 92.6&nbsp;</small><a style="cursor: pointer;"> Ryan Suter</a><small class="grey"> D (stdDev: 34.82)</small> <a href="#" class="" fp-player-name="Ryan Suter"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T14) 93.6&nbsp;</small><a style="cursor: pointer;"> Tyler Johnson</a><small class="grey"> C (stdDev: 29.26)</small> <a href="#" class="" fp-player-name="Tyler Johnson"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T14) 89.6&nbsp;</small><a style="cursor: pointer;"> Patrick Sharp</a><small class="grey"> LW (stdDev: 17.84)</small> <a href="#" class="" fp-player-name="Patrick Sharp"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T14) 94.2&nbsp;</small><a style="cursor: pointer;"> Keith Yandle</a><small class="grey"> D (stdDev: 21.06)</small> <a href="#" class="" fp-player-name="Keith Yandle"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T14) 93.0&nbsp;</small><a style="cursor: pointer;"> Mark Stone</a><small class="grey"> RW (stdDev: 19.99)</small> <a href="#" class="" fp-player-name="Mark Stone"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T14) 92.2&nbsp;</small><a style="cursor: pointer;"> Kyle Palmieri</a><small class="grey"> RW (stdDev: 17.93)</small> <a href="#" class="" fp-player-name="Kyle Palmieri"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T14) 94.6&nbsp;</small><a style="cursor: pointer;"> Brayden Schenn</a><small class="grey"> C (stdDev: 20.41)</small> <a href="#" class="" fp-player-name="Brayden Schenn"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T14) 87.6&nbsp;</small><a style="cursor: pointer;"> Gabriel Landeskog</a><small class="grey"> LW (stdDev: 8.45)</small> <a href="#" class="" fp-player-name="Gabriel Landeskog"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T15) 110.4&nbsp;</small><a style="cursor: pointer;"> Sergei Bobrovsky</a><small class="grey"> G (stdDev: 41.86)</small> <a href="#" class="" fp-player-name="Sergei Bobrovsky"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T14) 95.4&nbsp;</small><a style="cursor: pointer;"> Max Domi</a><small class="grey"> C (stdDev: 23.72)</small> <a href="#" class="" fp-player-name="Max Domi"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 105.8&nbsp;</small><a style="cursor: pointer;"> Ryan O'Reilly</a><small class="grey"> C (stdDev: 31.66)</small> <a href="#" class="" fp-player-name="Ryan O'Reilly"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T14) 90.4&nbsp;</small><a style="cursor: pointer;"> Kyle Okposo</a><small class="grey"> RW (stdDev: 10.93)</small> <a href="#" class="" fp-player-name="Kyle Okposo"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T15) 114.4&nbsp;</small><a style="cursor: pointer;"> David Backes</a><small class="grey"> C (stdDev: 37.95)</small> <a href="#" class="" fp-player-name="David Backes"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T16) 104.6&nbsp;</small><a style="cursor: pointer;"> Jordan Eberle</a><small class="grey"> RW (stdDev: 26.55)</small> <a href="#" class="" fp-player-name="Jordan Eberle"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T14) 96.8&nbsp;</small><a style="cursor: pointer;"> Loui Eriksson</a><small class="grey"> LW (stdDev: 22.9)</small> <a href="#" class="" fp-player-name="Loui Eriksson"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T16) 105.2&nbsp;</small><a style="cursor: pointer;"> Matt Murray</a><small class="grey"> G (stdDev: 27.37)</small> <a href="#" class="" fp-player-name="Matt Murray"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T14) 97.2&nbsp;</small><a style="cursor: pointer;"> Petr Mrazek</a><small class="grey"> G (stdDev: 15.88)</small> <a href="#" class="" fp-player-name="Petr Mrazek"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 103.0&nbsp;</small><a style="cursor: pointer;"> Ryan Kesler</a><small class="grey"> C (stdDev: 29.6)</small> <a href="#" class="" fp-player-name="Ryan Kesler"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 108.0&nbsp;</small><a style="cursor: pointer;"> Henrik Sedin</a><small class="grey"> C (stdDev: 30.19)</small> <a href="#" class="" fp-player-name="Henrik Sedin"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 99.8&nbsp;</small><a style="cursor: pointer;"> Derick Brassard</a><small class="grey"> C (stdDev: 22.34)</small> <a href="#" class="" fp-player-name="Derick Brassard"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 104.2&nbsp;</small><a style="cursor: pointer;"> Matt Duchene</a><small class="grey"> C (stdDev: 22.82)</small> <a href="#" class="" fp-player-name="Matt Duchene"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T14) 93.6&nbsp;</small><a style="cursor: pointer;"> Auston Matthews</a><small class="grey"> C (stdDev: 7.96)</small> <a href="#" class="" fp-player-name="Auston Matthews"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T17) 142.8&nbsp;</small><a style="cursor: pointer;"> Evander Kane</a><small class="grey"> LW (stdDev: 48.43)</small> <a href="#" class="" fp-player-name="Evander Kane"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T16) 106.0&nbsp;</small><a style="cursor: pointer;"> Henrik Zetterberg</a><small class="grey"> LW (stdDev: 23.03)</small> <a href="#" class="" fp-player-name="Henrik Zetterberg"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T14) 96.6&nbsp;</small><a style="cursor: pointer;"> Kevin Shattenkirk</a><small class="grey"> D (stdDev: 10.48)</small> <a href="#" class="" fp-player-name="Kevin Shattenkirk"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 102.6&nbsp;</small><a style="cursor: pointer;"> Mike Hoffman</a><small class="grey"> C (stdDev: 19.06)</small> <a href="#" class="" fp-player-name="Mike Hoffman"></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T15) 117.2&nbsp;</small><a style="cursor: pointer;"> Alex Galchenyuk</a><small class="grey"> C (stdDev: 35.33)</small> <a href="#" class="" fp-player-name="Alex Galchenyuk"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T16) 105.5&nbsp;</small><a style="cursor: pointer;"> Dylan Larkin</a><small class="grey"> C (stdDev: 24.09)</small> <a href="#" class="" fp-player-name="Dylan Larkin"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T15) 114.2&nbsp;</small><a style="cursor: pointer;"> Brandon Saad</a><small class="grey"> LW (stdDev: 27.12)</small> <a href="#" class="" fp-player-name="Brandon Saad"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T17) 135.8&nbsp;</small><a style="cursor: pointer;"> Marc-Andre Fleury</a><small class="grey"> G (stdDev: 43.71)</small> <a href="#" class="" fp-player-name="Marc-Andre Fleury"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T16) 100.0&nbsp;</small><a style="cursor: pointer;"> Torey Krug</a><small class="grey"> D (stdDev: 9.8)</small> <a href="#" class="" fp-player-name="Torey Krug"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T15) 115.8&nbsp;</small><a style="cursor: pointer;"> Jaden Schwartz</a><small class="grey"> LW (stdDev: 26.51)</small> <a href="#" class="" fp-player-name="Jaden Schwartz"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T15) 119.6&nbsp;</small><a style="cursor: pointer;"> Rasmus Ristolainen</a><small class="grey"> D (stdDev: 25.11)</small> <a href="#" class="" fp-player-name="Rasmus Ristolainen"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T17) 138.8&nbsp;</small><a style="cursor: pointer;"> Bobby Ryan</a><small class="grey"> RW (stdDev: 39.12)</small> <a href="#" class="" fp-player-name="Bobby Ryan"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T15) 119.8&nbsp;</small><a style="cursor: pointer;"> Ondrej Palat</a><small class="grey"> LW (stdDev: 27.85)</small> <a href="#" class="" fp-player-name="Ondrej Palat"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T15) 116.0&nbsp;</small><a style="cursor: pointer;"> Adam Henrique</a><small class="grey"> C (stdDev: 18.46)</small> <a href="#" class="" fp-player-name="Adam Henrique"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T15) 119.4&nbsp;</small><a style="cursor: pointer;"> Jaromir Jagr</a><small class="grey"> RW (stdDev: 17.42)</small> <a href="#" class="" fp-player-name="Jaromir Jagr"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T16) 109.8&nbsp;</small><a style="cursor: pointer;"> Rick Nash</a><small class="grey"> LW (stdDev: 14.54)</small> <a href="#" class="" fp-player-name="Rick Nash"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T15) 111.2&nbsp;</small><a style="cursor: pointer;"> David Krejci</a><small class="grey"> C (stdDev: 14.74)</small> <a href="#" class="" fp-player-name="David Krejci"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T17) 143.25&nbsp;</small><a style="cursor: pointer;"> Andrei Markov</a><small class="grey"> D (stdDev: 49.5)</small> <a href="#" class="" fp-player-name="Andrei Markov"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T15) 114.2&nbsp;</small><a style="cursor: pointer;"> Tyson Barrie</a><small class="grey"> D (stdDev: 15.08)</small> <a href="#" class="" fp-player-name="Tyson Barrie"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T18) 114.6&nbsp;</small><a style="cursor: pointer;"> Andrew Ladd</a><small class="grey"> LW (stdDev: 17.04)</small> <a href="#" class="" fp-player-name="Andrew Ladd"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T19) 143.5&nbsp;</small><a style="cursor: pointer;"> Tomas Plekanec</a><small class="grey"> C (stdDev: 39.3)</small> <a href="#" class="" fp-player-name="Tomas Plekanec"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T20) 123.6&nbsp;</small><a style="cursor: pointer;"> Patrik Laine</a><small class="grey"> LW (stdDev: 39.08)</small> <a href="#" class="" fp-player-name="Patrik Laine"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T18) 114.4&nbsp;</small><a style="cursor: pointer;"> Justin Faulk</a><small class="grey"> D (stdDev: 23.46)</small> <a href="#" class="" fp-player-name="Justin Faulk"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T18) 117.4&nbsp;</small><a style="cursor: pointer;"> Jonathan Drouin</a><small class="grey"> LW (stdDev: 19.37)</small> <a href="#" class="" fp-player-name="Jonathan Drouin"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T19) 150.0&nbsp;</small><a style="cursor: pointer;"> Chris Kreider</a><small class="grey"> LW (stdDev: 35.17)</small> <a href="#" class="" fp-player-name="Chris Kreider"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T18) 110.8&nbsp;</small><a style="cursor: pointer;"> James Van Riemsdyk</a><small class="grey"> LW (stdDev: 10.15)</small> <a href="#" class="" fp-player-name="James Van Riemsdyk"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T18) 111.6&nbsp;</small><a style="cursor: pointer;"> Aaron Ekblad</a><small class="grey"> D (stdDev: 11.18)</small> <a href="#" class="" fp-player-name="Aaron Ekblad"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 131.8&nbsp;</small><a style="cursor: pointer;"> Mike Cammalleri</a><small class="grey"> C (stdDev: 26.74)</small> <a href="#" class="" fp-player-name="Mike Cammalleri"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 125.0&nbsp;</small><a style="cursor: pointer;"> Tomas Hertl</a><small class="grey"> C (stdDev: 14.55)</small> <a href="#" class="" fp-player-name="Tomas Hertl"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T19) 141.6&nbsp;</small><a style="cursor: pointer;"> Jussi Jokinen</a><small class="grey"> LW (stdDev: 30.41)</small> <a href="#" class="" fp-player-name="Jussi Jokinen"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 138.2&nbsp;</small><a style="cursor: pointer;"> Derek Stepan</a><small class="grey"> C (stdDev: 23.34)</small> <a href="#" class="" fp-player-name="Derek Stepan"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T20) 126.8&nbsp;</small><a style="cursor: pointer;"> Brendan Gallagher</a><small class="grey"> RW (stdDev: 15.92)</small> <a href="#" class="" fp-player-name="Brendan Gallagher"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T20) 123.4&nbsp;</small><a style="cursor: pointer;"> Mats Zuccarello</a><small class="grey"> LW (stdDev: 15.83)</small> <a href="#" class="" fp-player-name="Mats Zuccarello"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 158.0&nbsp;</small><a style="cursor: pointer;"> Vincent Trocheck</a><small class="grey"> C (stdDev: 53.51)</small> <a href="#" class="" fp-player-name="Vincent Trocheck"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 127.0&nbsp;</small><a style="cursor: pointer;"> Dylan Larkin</a><small class="grey"> C (stdDev: 25.0)</small> <a href="#" class="" fp-player-name="Dylan Larkin"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T19) 143.2&nbsp;</small><a style="cursor: pointer;"> Frederik Andersen</a><small class="grey"> G (stdDev: 32.8)</small> <a href="#" class="" fp-player-name="Frederik Andersen"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T20) 134.6&nbsp;</small><a style="cursor: pointer;"> Semyon Varlamov</a><small class="grey"> G (stdDev: 28.06)</small> <a href="#" class="" fp-player-name="Semyon Varlamov"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T20) 132.0&nbsp;</small><a style="cursor: pointer;"> Alexander Radulov</a><small class="grey"> LW (stdDev: 19.15)</small> <a href="#" class="" fp-player-name="Alexander Radulov"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T19) 152.6&nbsp;</small><a style="cursor: pointer;"> Mikko Koivu</a><small class="grey"> C (stdDev: 44.05)</small> <a href="#" class="" fp-player-name="Mikko Koivu"></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T22) 169.0&nbsp;</small><a style="cursor: pointer;"> Scott Hartnell</a><small class="grey"> LW (stdDev: 49.17)</small> <a href="#" class="" fp-player-name="Scott Hartnell"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T19) 151.5&nbsp;</small><a style="cursor: pointer;"> Steve Mason</a><small class="grey"> G (stdDev: 31.2)</small> <a href="#" class="" fp-player-name="Steve Mason"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T19) 152.75&nbsp;</small><a style="cursor: pointer;"> Robby Fabbri</a><small class="grey"> C (stdDev: 32.71)</small> <a href="#" class="" fp-player-name="Robby Fabbri"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T20) 129.4&nbsp;</small><a style="cursor: pointer;"> Jake Muzzin</a><small class="grey"> D (stdDev: 14.95)</small> <a href="#" class="" fp-player-name="Jake Muzzin"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 131.6&nbsp;</small><a style="cursor: pointer;"> Boone Jenner</a><small class="grey"> C (stdDev: 19.71)</small> <a href="#" class="" fp-player-name="Boone Jenner"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 161.6&nbsp;</small><a style="cursor: pointer;"> Eric Staal</a><small class="grey"> C (stdDev: 35.63)</small> <a href="#" class="" fp-player-name="Eric Staal"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T19) 140.4&nbsp;</small><a style="cursor: pointer;"> Brent Seabrook</a><small class="grey"> D (stdDev: 28.69)</small> <a href="#" class="" fp-player-name="Brent Seabrook"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T19) 145.8&nbsp;</small><a style="cursor: pointer;"> Kyle Turris</a><small class="grey"> C (stdDev: 27.67)</small> <a href="#" class="" fp-player-name="Kyle Turris"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T19) 150.25&nbsp;</small><a style="cursor: pointer;"> Justin Abdelkader</a><small class="grey"> LW (stdDev: 22.88)</small> <a href="#" class="" fp-player-name="Justin Abdelkader"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T20) 128.6&nbsp;</small><a style="cursor: pointer;"> Sami Vatanen</a><small class="grey"> D (stdDev: 11.62)</small> <a href="#" class="" fp-player-name="Sami Vatanen"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T20) 138.0&nbsp;</small><a style="cursor: pointer;"> Craig Smith</a><small class="grey"> C (stdDev: 16.51)</small> <a href="#" class="" fp-player-name="Craig Smith"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T19) 144.0&nbsp;</small><a style="cursor: pointer;"> Justin Williams</a><small class="grey"> RW (stdDev: 17.74)</small> <a href="#" class="" fp-player-name="Justin Williams"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 160.0&nbsp;</small><a style="cursor: pointer;"> Nick Bonino</a><small class="grey"> C (stdDev: 34.71)</small> <a href="#" class="" fp-player-name="Nick Bonino"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T19) 148.4&nbsp;</small><a style="cursor: pointer;"> Anthony Duclair</a><small class="grey"> LW (stdDev: 20.6)</small> <a href="#" class="" fp-player-name="Anthony Duclair"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T20) 136.0&nbsp;</small><a style="cursor: pointer;"> Alex Pietrangelo</a><small class="grey"> D (stdDev: 15.91)</small> <a href="#" class="" fp-player-name="Alex Pietrangelo"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T21) 163.2&nbsp;</small><a style="cursor: pointer;"> Robin Lehner</a><small class="grey"> G (stdDev: 33.16)</small> <a href="#" class="" fp-player-name="Robin Lehner"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T19) 145.0&nbsp;</small><a style="cursor: pointer;"> Nick Foligno</a><small class="grey"> LW (stdDev: 24.83)</small> <a href="#" class="" fp-player-name="Nick Foligno"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 170.8&nbsp;</small><a style="cursor: pointer;"> Mika Zibanejad</a><small class="grey"> C (stdDev: 29.63)</small> <a href="#" class="" fp-player-name="Mika Zibanejad"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T21) 159.6&nbsp;</small><a style="cursor: pointer;"> Marian Hossa</a><small class="grey"> RW (stdDev: 26.58)</small> <a href="#" class="" fp-player-name="Marian Hossa"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T21) 162.8&nbsp;</small><a style="cursor: pointer;"> P.A. Parenteau</a><small class="grey"> RW (stdDev: 32.82)</small> <a href="#" class="" fp-player-name="P.A. Parenteau"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 158.0&nbsp;</small><a style="cursor: pointer;"> Marc-Edouard Vlasic</a><small class="grey"> D (stdDev: 22.66)</small> <a href="#" class="" fp-player-name="Marc-Edouard Vlasic"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T19) 145.6&nbsp;</small><a style="cursor: pointer;"> Ryan McDonagh</a><small class="grey"> D (stdDev: 13.81)</small> <a href="#" class="" fp-player-name="Ryan McDonagh"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 171.2&nbsp;</small><a style="cursor: pointer;"> Sam Reinhart</a><small class="grey"> C (stdDev: 34.24)</small> <a href="#" class="" fp-player-name="Sam Reinhart"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T23) 187.75&nbsp;</small><a style="cursor: pointer;"> Chris Kunitz</a><small class="grey"> LW (stdDev: 45.54)</small> <a href="#" class="" fp-player-name="Chris Kunitz"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 158.6&nbsp;</small><a style="cursor: pointer;"> Bryan Little</a><small class="grey"> C (stdDev: 18.21)</small> <a href="#" class="" fp-player-name="Bryan Little"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T21) 162.0&nbsp;</small><a style="cursor: pointer;"> Thomas Greiss</a><small class="grey"> G (stdDev: 36.75)</small> <a href="#" class="" fp-player-name="Thomas Greiss"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 171.25&nbsp;</small><a style="cursor: pointer;"> Nazem Kadri</a><small class="grey"> C (stdDev: 24.57)</small> <a href="#" class="" fp-player-name="Nazem Kadri"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 166.2&nbsp;</small><a style="cursor: pointer;"> Colton Parayko</a><small class="grey"> D (stdDev: 21.64)</small> <a href="#" class="" fp-player-name="Colton Parayko"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T23) 189.6&nbsp;</small><a style="cursor: pointer;"> Teuvo Teravainen</a><small class="grey"> C (stdDev: 36.42)</small> <a href="#" class="" fp-player-name="Teuvo Teravainen"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 158.4&nbsp;</small><a style="cursor: pointer;"> Dougie Hamilton</a><small class="grey"> D (stdDev: 16.99)</small> <a href="#" class="" fp-player-name="Dougie Hamilton"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T19) 146.8&nbsp;</small><a style="cursor: pointer;"> Jeff Skinner</a><small class="grey"> C (stdDev: 14.72)</small> <a href="#" class="" fp-player-name="Jeff Skinner"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T21) 163.25&nbsp;</small><a style="cursor: pointer;"> Carl Hagelin</a><small class="grey"> LW (stdDev: 22.34)</small> <a href="#" class="" fp-player-name="Carl Hagelin"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 166.0&nbsp;</small><a style="cursor: pointer;"> Frans Nielsen</a><small class="grey"> C (stdDev: 20.21)</small> <a href="#" class="" fp-player-name="Frans Nielsen"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T22) 177.2&nbsp;</small><a style="cursor: pointer;"> Seth Jones</a><small class="grey"> D (stdDev: 35.62)</small> <a href="#" class="" fp-player-name="Seth Jones"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T22) 176.0&nbsp;</small><a style="cursor: pointer;"> Tomas Tatar</a><small class="grey"> LW (stdDev: 24.75)</small> <a href="#" class="" fp-player-name="Tomas Tatar"></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T23) 191.5&nbsp;</small><a style="cursor: pointer;"> Alex Goligoski</a><small class="grey"> D (stdDev: 38.51)</small> <a href="#" class="" fp-player-name="Alex Goligoski"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T22) 174.6&nbsp;</small><a style="cursor: pointer;"> Zdeno Chara</a><small class="grey"> D (stdDev: 18.95)</small> <a href="#" class="" fp-player-name="Zdeno Chara"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 164.0&nbsp;</small><a style="cursor: pointer;"> Leon Draisaitl</a><small class="grey"> C (stdDev: 13.96)</small> <a href="#" class="" fp-player-name="Leon Draisaitl"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T21) 165.0&nbsp;</small><a style="cursor: pointer;"> Reilly Smith</a><small class="grey"> RW (stdDev: 15.14)</small> <a href="#" class="" fp-player-name="Reilly Smith"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T23) 195.8&nbsp;</small><a style="cursor: pointer;"> Shane Doan</a><small class="grey"> RW (stdDev: 40.16)</small> <a href="#" class="" fp-player-name="Shane Doan"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 168.0&nbsp;</small><a style="cursor: pointer;"> Ryan Nugent-Hopkins</a><small class="grey"> C (stdDev: 24.14)</small> <a href="#" class="" fp-player-name="Ryan Nugent-Hopkins"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 180.5&nbsp;</small><a style="cursor: pointer;"> Brandon Dubinsky</a><small class="grey"> C (stdDev: 21.59)</small> <a href="#" class="" fp-player-name="Brandon Dubinsky"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T22) 169.5&nbsp;</small><a style="cursor: pointer;"> Cam Atkinson</a><small class="grey"> RW (stdDev: 16.77)</small> <a href="#" class="" fp-player-name="Cam Atkinson"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T21) 160.4&nbsp;</small><a style="cursor: pointer;"> Jaroslav Halak</a><small class="grey"> G (stdDev: 16.66)</small> <a href="#" class="" fp-player-name="Jaroslav Halak"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T19) 149.5&nbsp;</small><a style="cursor: pointer;"> Kari Lehtonen</a><small class="grey"> G (stdDev: 4.5)</small> <a href="#" class="" fp-player-name="Kari Lehtonen"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T22) 169.33&nbsp;</small><a style="cursor: pointer;"> Victor Rask</a><small class="grey"> C (stdDev: 15.86)</small> <a href="#" class="" fp-player-name="Victor Rask"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T23) 186.4&nbsp;</small><a style="cursor: pointer;"> William Nylander</a><small class="grey"> C (stdDev: 26.78)</small> <a href="#" class="" fp-player-name="William Nylander"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T19) 153.0&nbsp;</small><a style="cursor: pointer;"> Connor Hellebuyck</a><small class="grey"> G (stdDev: 3.0)</small> <a href="#" class="" fp-player-name="Connor Hellebuyck"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T21) 166.25&nbsp;</small><a style="cursor: pointer;"> Rickard Rakell</a><small class="grey"> RW (stdDev: 15.58)</small> <a href="#" class="" fp-player-name="Rickard Rakell"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T23) 200.33&nbsp;</small><a style="cursor: pointer;"> Mike Ribeiro</a><small class="grey"> C (stdDev: 52.31)</small> <a href="#" class="" fp-player-name="Mike Ribeiro"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T23) 192.4&nbsp;</small><a style="cursor: pointer;"> Hampus Lindholm</a><small class="grey"> D (stdDev: 24.22)</small> <a href="#" class="" fp-player-name="Hampus Lindholm"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T23) 189.67&nbsp;</small><a style="cursor: pointer;"> Joonas Donskoi</a><small class="grey"> RW (stdDev: 28.83)</small> <a href="#" class="" fp-player-name="Joonas Donskoi"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T22) 182.2&nbsp;</small><a style="cursor: pointer;"> Anton Stralman</a><small class="grey"> D (stdDev: 36.98)</small> <a href="#" class="" fp-player-name="Anton Stralman"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T23) 205.25&nbsp;</small><a style="cursor: pointer;"> Trevor Daley</a><small class="grey"> D (stdDev: 33.21)</small> <a href="#" class="" fp-player-name="Trevor Daley"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T23) 194.33&nbsp;</small><a style="cursor: pointer;"> Andrei Vasilevskiy</a><small class="grey"> G (stdDev: 28.52)</small> <a href="#" class="" fp-player-name="Andrei Vasilevskiy"></a></li>
+								<li class="listitem1"><img src=images/centerbt.png height=20px><small class="grey"> (T21) 167.0&nbsp;</small><a style="cursor: pointer;"> Paul Stastny</a><small class="grey"> C (stdDev: 7.91)</small> <a href="#" class="" fp-player-name="Paul Stastny"></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T22) 171.33&nbsp;</small><a style="cursor: pointer;"> Morgan Rielly</a><small class="grey"> D (stdDev: 13.91)</small> <a href="#" class="" fp-player-name="Morgan Rielly"></a></li>
+								<li class="listitem1"><img src=images/leftwingbt.png height=20px><small class="grey"> (T23) 196.75&nbsp;</small><a style="cursor: pointer;"> Patrick Marleau</a><small class="grey"> LW (stdDev: 27.36)</small> <a href="#" class="" fp-player-name="Patrick Marleau"></a></li>
+								<li class="listitem1"><img src=images/rightwingbt.png height=20px><small class="grey"> (T22) 177.5&nbsp;</small><a style="cursor: pointer;"> Mikkel Boedker</a><small class="grey"> RW (stdDev: 19.01)</small> <a href="#" class="" fp-player-name="Mikkel Boedker"></a></li>
+								<li class="listitem1"><img src=images/goaliebt.png height=20px><small class="grey"> (T23) 194.0&nbsp;</small><a style="cursor: pointer;"> James Reimer</a><small class="grey"> G (stdDev: 36.0)</small> <a href="#" class="" fp-player-name="James Reimer"></a></li>
+					 </ul> 
+			 </div> 
+              </div><!--row-->
+            </div>
+        </div>
+        <div id="About" class="tabcontent">
+          <h4>About</h4></br></br>
+          <p2>This website is meant to serve as a draft aid for Fantasy Hockey. The website inludes an interactive draft sheet as well as overall and positional ranking-graphs.</p2></br>
+          <p2>Players are assigned tiers, for which players within a like-tier can be considered equals. This concept was expanded from Boris Chen's work, which can be found here (http://www.borischen.co/).</p2></br>
+          <p2>This program utilizes unsupervised machine learning by flat clustering with KMeans -- a simple way to uncover like tiers within the player data mined from FantasyPros (http://www.fantasypros.com/).</p2></br>
+        </div>
+        <div id="Overall" class="tabcontent">
+	      	<ul class="tab2">
+	          <li><a href="#" class="tablinks2 active2" onclick="openMinor(event, '1-60')">1-60</a></li>
+	          <li><a href="#" class="tablinks2" onclick="openMinor(event, '61-120')">61-120</a></li>
+	          <li><a href="#" class="tablinks2" onclick="openMinor(event, '121-200')">121-200</a></li>	          
+	        </ul>
+	        <div id="1-60" class="tabcontent2" style="display: block;">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-1.png"></li>
+	          </div>
+	        </div>
+	        <div id="61-120" class="tabcontent2">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-2.png"></li>
+	          </div>
+	        </div>
+	        <div id="121-200" class="tabcontent2">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-3.png"></li>
+	          </div>
+	        </div>	        	        
+        </div>
+        <div id="C" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-c-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="LW" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-lw-raw-1.png"></li>
+           </div>
+        </div>  
+        <div id="RW" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-rw-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="D" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-d-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="G" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-g-raw-1.png"></li>
+           </div>
+        </div>             
+	    <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            function openMinor(evt2, minorName) {
+                var i, tabcontent2, tablinks2;
+                tabcontent2 = document.getElementsByClassName("tabcontent2");
+                for (i = 0; i < tabcontent2.length; i++) {
+                    tabcontent2[i].style.display = "none";
+                }
+                tablinks2 = document.getElementsByClassName("tablinks2");
+                for (i = 0; i < tablinks2.length; i++) {
+                    tablinks2[i].className = tablinks2[i].className.replace(" active2", "");
+                }
+                document.getElementById(minorName).style.display = "block";
+                evt2.currentTarget.className += " active2";
+            }
+
+            //Adjusts outline based on color
+			$("li:contains('(T1)')").css({'background-color':"#a6cee3"})
+            $("li:contains('(T2)')").css({'background-color':'#1f78b4'})
+            $("li:contains('(T3)')").css({'background-color':'#b2df8a'})
+            $("li:contains('(T4)')").css({'background-color':'#33a02c'})
+            $("li:contains('(T5)')").css({'background-color':'#fb9a99'})
+            $("li:contains('(T6)')").css({'background-color':'#e31a1c'})
+            $("li:contains('(T7)')").css({'background-color':'#fdbf6f'})
+            $("li:contains('(T8)')").css({'background-color':'#ff7f00'})
+            $("li:contains('(T9)')").css({'background-color':'#cab2d6'})
+            $("li:contains('(T10)')").css({'background-color':'#6a3d9a'})
+            $("li:contains('(T11)')").css({'background-color':'#ffff99'})
+            $("li:contains('(T12)')").css({'background-color':'#b15928'})
+            $("li:contains('(T13)')").css({'background-color':'#8dd3c7'})
+            $("li:contains('(T14)')").css({'background-color':'#ffffb3'})
+            $("li:contains('(T15)')").css({'background-color':'#bebada'})
+            $("li:contains('(T16)')").css({'background-color':'#fb8072'})
+            $("li:contains('(T17)')").css({'background-color':'#80b1d3'})
+            $("li:contains('(T18)')").css({'background-color':'#fdb462'})
+            $("li:contains('(T19)')").css({'background-color':'#b3de69'})
+            $("li:contains('(T20)')").css({'background-color':'#fccde5'})
+            $("li:contains('(T21)')").css({'background-color':'#d9d9d9'})
+            $("li:contains('(T22)')").css({'background-color':'#bc80bd'})
+            $("li:contains('(T23)')").css({'background-color':'#ccebc5'})
+            $("li:contains('(T24)')").css({'background-color':'#ffed6f'})
+            $("li:contains('(T25)')").css({'background-color':'#1f78b4'})
+            $("li:contains('(T26)')").css({'background-color':'#b2df8a'})
+            $("li:contains('(T27)')").css({'background-color':'#33a02c'})
+            $("li:contains('(T28)')").css({'background-color':'#fb9a99'})
+
+	    	//Assigns player position class to the list item containing the string
+			$("li:contains('C (stdDev:')").addClass("center");
+			$("li:contains('LW (stdDev:')").addClass("leftwing");
+			$("li:contains('RW (stdDev:')").addClass("rightwing");
+			$("li:contains('D (stdDev:')").addClass("defense");
+			$("li:contains('G (stdDev:')").addClass("goalie");
+
+			//Toggles classes of list items on click eventsf
+		    $(".listitem1").click(function(e){
+        	 $(this).toggleClass('listitem2'); 
+   		    });
+   		 	$(".listitem1").dblclick(function(f){
+        		$(this).toggleClass('listitem3'); 
+	   		});
+
+	   		$(".centerbt").click(function(g){
+
+	   			   			$("li:contains('C-')").toggleClass("hiddenbt");
+	   			   			$(".centerbt").toggleClass("btshrink");
+	   			   			
+	   			});
+	   		$(".leftwingbt").click(function(g){
+	   						
+	   			   			$("li:contains('LW-')").toggleClass("hiddenbt");
+	   			   			$(".leftwingbt").toggleClass("btshrink");
+	   			   			
+	   			});
+	   		$(".rightwingbt").click(function(g){
+
+	   			   			$("li:contains('RW-')").toggleClass("hiddenbt");
+	   			   			$(".rightwingbt").toggleClass("btshrink");
+	   			});
+	   		$(".defensebt").click(function(g){
+
+	   			   			$("li:contains('D-')").toggleClass("hiddenbt");
+	   			   			$(".defensebt").toggleClass("btshrink");
+	   			});
+	   			   			
+	   			
+	   		$(".goaliebt").click(function(g){
+
+	   			   			$("li:contains('G-')").toggleClass("hiddenbt");
+	   			   			$(".goaliebt").toggleClass("btshrink");
+	   			});
+
+
+	   		var wrap = $("#wrap");
+
+			$(window).on("scroll", function() {
+    
+			  if ($(window).scrollTop() > 50) {
+			    wrap.addClass("positionsbartop");
+			  } else {
+			    wrap.removeClass("positionsbartop");
+			 }
+				});	   						
+	    </script>
+	      <!-- jQuery first, then Tether, then Bootstrap JS. -->
+		
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+		
+  </body>
+
+</html>

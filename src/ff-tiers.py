@@ -158,7 +158,7 @@ def perform_session_download(args, url, full_file_name):
         logger.info("Session download failed with: {}".format(e))
 
 
-def download_nfl_data(args, week, position_list):
+def download_nhl_data(args, week, position_list):
     """
     download xls file from fantasy pros to the data_directory specified in args
     :param args: list of parameters can be used to get data directories
@@ -173,17 +173,16 @@ def download_nfl_data(args, week, position_list):
             data_directory = args.data_directory
             # if preseason
             if week == 0:
-                preseason_rankings = ['https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/qb-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/rb-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/wr-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/te-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/k-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/dst-cheatsheets.php?export=xls']
+                preseason_rankings = ['https://www.fantasypros.com/nhl/rankings/overall.php?export=xls',
+                                      'https://www.fantasypros.com/nhl/rankings/c.php?export=xls',
+                                      'https://www.fantasypros.com/nhl/rankings/lw.php?export=xls',
+                                      'https://www.fantasypros.com/nhl/rankings/rw.php?export=xls',
+                                      'https://www.fantasypros.com/nhl/rankings/d.php?export=xls',
+                                      'https://www.fantasypros.com/nhl/rankings/g.php?export=xls']
                 preseason_rankings_names = ['week-0-preseason-overall-raw.xls',
-                                            'week-0-preseason-qb-raw.xls', 'week-0-preseason-rb-raw.xls',
-                                            'week-0-preseason-wr-raw.xls', 'week-0-preseason-te-raw.xls',
-                                            'week-0-preseason-k-raw.xls', 'week-0-preseason-dst-raw.xls']
+                                            'week-0-preseason-c-raw.xls', 'week-0-preseason-lw-raw.xls',
+                                            'week-0-preseason-rw-raw.xls', 'week-0-preseason-d-raw.xls',
+                                            'week-0-preseason-g-raw.xls']
                 # download each link separately
                 for item_position in range(len(preseason_rankings)):
                     # prepare link and path/filename
@@ -260,24 +259,26 @@ def lists_from_csv(position, week, data_directory):
                 csv_reader = csv.reader(csv_file)
                 # iterate over each row adding column to appropriate list
                 for row in csv_reader:
-                    rank_list.append(int(row[0]))
-                    name_list.append(str(row[1]))
+                    logger.debug(row[:-1])
                     # preseason-overall includes position column, this accounts for it
-                    if position == 'preseason-overall' or position == 'flex':
+                    if (position == 'preseason-overall' or position == 'flex') and (row[0]!= '' or row[6] != ''):
+                        rank_list.append(int(row[0]))
+                        name_list.append(str(row[1]))
                         position_list.append(str(row[2]))
-                        average_rank_list.append(float(row[7]))
-                        standard_deviation_list.append(float(row[8]))
-                        if row[9] != '' and row[0] != '':
-                            vADP = int(row[9]) - int(row[0])
-                            vs_adp_list.append(vADP)
-                        else: vs_adp_list.append('')
-                    # all other positions will use this
-                    else:
-                        position_list.append(str(position))
                         average_rank_list.append(float(row[6]))
                         standard_deviation_list.append(float(row[7]))
-                        vs_adp_list.append('')
-            list_of_lists = [rank_list, name_list, position_list, average_rank_list, standard_deviation_list, vs_adp_list]
+                        # if row[9] != '' and row[0] != '':
+                        #     vADP = int(row[9]) - int(row[0])
+                        #     vs_adp_list.append(vADP)
+                        # else: vs_adp_list.append('')
+                    # all other positions will use this
+                    elif (row[0] != '' or row[5] != ''):
+                        rank_list.append(int(row[0]))
+                        name_list.append(str(row[1]))
+                        position_list.append(str(position))
+                        average_rank_list.append(float(row[5]))
+                        standard_deviation_list.append(float(row[6]))
+            list_of_lists = [rank_list, name_list, position_list, average_rank_list, standard_deviation_list]
             return list_of_lists
         else:
             logger.info("CSV file not found for: {} - Week {}. Skipping position...".format(position, week))
@@ -294,13 +295,12 @@ def get_cluster_settings(week):
     """
     logger = logging.getLogger()
     # preseason clustering settings
-    preseason_cluster_settings = [{'pos': 'preseason-overall', 'plot1': 60, 'k_val_1': 10, 'plot2': 60, 'k_val_2': 8, 'plot3': 80, 'k_val_3': 8},
-                                  {'pos': 'preseason-qb', 'max_num': 24, 'k_val': 8},
-                                  {'pos': 'preseason-rb', 'max_num': 40, 'k_val': 9},
-                                  {'pos': 'preseason-wr', 'max_num': 60, 'k_val': 12},
-                                  {'pos': 'preseason-te', 'max_num': 24, 'k_val': 8},
-                                  {'pos': 'preseason-k', 'max_num': 24, 'k_val': 5},
-                                  {'pos': 'preseason-dst', 'max_num': 24, 'k_val': 6}]
+    preseason_cluster_settings = [{'pos': 'preseason-overall', 'plot1': 60, 'k_val_1': 10, 'plot2': 60, 'k_val_2': 7, 'plot3': 80, 'k_val_3': 6},
+                                  {'pos': 'preseason-c', 'max_num': 24, 'k_val': 8},
+                                  {'pos': 'preseason-lw', 'max_num': 40, 'k_val': 9},
+                                  {'pos': 'preseason-rw', 'max_num': 60, 'k_val': 12},
+                                  {'pos': 'preseason-d', 'max_num': 24, 'k_val': 8},
+                                  {'pos': 'preseason-g', 'max_num': 24, 'k_val': 5}]
     # positional clustering settings
     weekly_pos_cluster_settings = [{'pos': 'qb', 'max_num': 24, 'k_val': 8},
                                    {'pos': 'rb', 'max_num': 40, 'k_val': 9},
@@ -375,7 +375,8 @@ def plot(position, week, args):
                     web_list_of_lists = []
                     for list in list_of_lists: web_list_of_lists.append(list[start1:stop3])
                     web_list_of_lists.append(ordered_labels[start1:stop3])
-                    ffb_draft_sheet(args, web_list_of_lists)
+                    logger.debug(web_list_of_lists)
+                    fh_draft_sheet(args, web_list_of_lists)
         else:
             max_number, k_value = get_position_setting(position, type_cluster_settings)
             plot_1 = []
@@ -450,18 +451,24 @@ def cluster_and_plot(list_of_lists, raw_plot_filename, title, args):
         webplots_directory = args.ffbdraft_directory + "images/" if webplot_filename_split[1] == '0' else args.ffbweekly_directory + "images/"
         webplot_full_file_name = os.path.join(webplots_directory, webplot_filename)
         # assign lists
-        rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[6]
+        rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[5]
         # empty list that will be converted into array
         average_rank_array = []
         for n in range(len(average_rank_list)):
             # build list from item and append the list to the list of lists
             item_list = [average_rank_list[n]]
             average_rank_array.append(item_list)
+        rank_array = []
+        for n in range(len(rank_list)):
+            # build list from item and append the list to the list of lists
+            item_list = [rank_list[n]]
+            rank_array.append(item_list)
         # convert the list of lists to an array
         X = np.array(average_rank_array)
+        Y = np.array(rank_list)
         # initialize KMeans and fit over the array
         kmeans = KMeans(n_clusters=k_value)
-        kmeans.fit(X)
+        kmeans.fit(X, Y)
         centroids = kmeans.cluster_centers_  # not used here
         # array of labels where a cluster value is assigned to each item
         labels = kmeans.labels_
@@ -524,14 +531,13 @@ def clustering_program(args, start_week_date, position_list):
     week = get_nfl_week(start_week_date)
     adjust_position_list = position_list
     if week == 0:
-        adjust_position_list.remove('flex')
         adjust_position_list.insert(0, 'overall')
-        download_nfl_data(args, week, position_list)
+        download_nhl_data(args, week, position_list)
         for pos in position_list:
             preseason_pos = 'preseason-{}'.format(pos)
             plot(preseason_pos, week, args)
     else:
-        download_nfl_data(args, week, position_list)
+        download_nhl_data(args, week, position_list)
         for pos in position_list:
             plot(pos, week, args)
 
@@ -563,23 +569,24 @@ def reorder_labels(unordered_labels):
     return ordered_labels
 
 
-def ffb_draft_sheet(args, list_of_lists):
+def fh_draft_sheet(args, list_of_lists):
     """
     
     :param args: 
     :param list_of_lists: 
     :return: 
     """
+    logger = logging.getLogger()
     tophalf_html = args.ffbdraft_directory + "_tophalf_draft_html.text"
     bottomhalf_html = args.ffbdraft_directory + "_bottomhalf_draft_html.text"
-    destination_html = args.ffbdraft_directory + "FantasyFootballDraftSheet.html"
+    destination_html = args.ffbdraft_directory + "FantasyHockeyDraftSheet.html"
     with open(tophalf_html, 'r') as tophalf_html_file, open(bottomhalf_html, 'r') as bottomhalf_html_file, open(destination_html, 'w') as destination_html_file:
         # write top half stuff
         tophalf_html_contents = tophalf_html_file.read()
         destination_html_file.write(tophalf_html_contents)
 
-        position_images = {'QB': "images/quarterbackbt.png", 'RB': "images/runningbackbt.png", 'WR' : "images/receiverbt.png",
-                           'TE': "images/tightendbt.png", 'DST': "images/defensebt.png", 'K': "images/kickerbt.png"}
+        position_images = {'C': "images/centerbt.png", 'LW': "images/leftwingbt.png", 'RW' : "images/rightwingbt.png",
+                           'D': "images/defensebt.png", 'G': "images/goaliebt.png"}
 
         # do other stuff
         div_start = '\t\t\t\t<div class="col-xs-12 col-lg-2 rowpadsmall"> \n\t\t\t\t\t <ul class="list1"> \n'
@@ -594,27 +601,28 @@ def ffb_draft_sheet(args, list_of_lists):
 
         for i in range(6):
             destination_html_file.write(div_start)
-            rank_list, name_list, position_list, average_rank_list, vs_adp_list, ordered_labels = list_of_lists[0][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[1][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[2][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[3][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[4][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[5][starts[i]:stops[i]]
+            rank_list, name_list, position_list, average_rank_list, std_dev, ordered_labels = list_of_lists[0][starts[i]:stops[i]], \
+                                                                                              list_of_lists[1][starts[i]:stops[i]], \
+                                                                                              list_of_lists[2][starts[i]:stops[i]], \
+                                                                                              list_of_lists[3][starts[i]:stops[i]], \
+                                                                                              list_of_lists[4][starts[i]:stops[i]], \
+                                                                                              list_of_lists[5][starts[i]:stops[i]]
+
             print(name_list)
             for n in range(len(rank_list)):
                 formatted_ranking = float("{0:.2f}".format(average_rank_list[n]))
-                raw_position = ''.join([i for i in position_list[n] if not i.isdigit()])
-                position_rank = ''.join([i for i in position_list[n] if i.isdigit()])
-                position_image = position_images.get(raw_position)
-                if vs_adp_list[n] == 0:
-                    vs_adp_str = '0'
-                elif vs_adp_list[n] != '':
-                    vs_adp_str = '-' + str(abs(vs_adp_list[n])) if vs_adp_list[n] < 0 else '+' + str(vs_adp_list[n])
-                else:
-                    vs_adp_str = ''
+                formatted_stdDev = float("{0:.2f}".format(std_dev[n]))
+                position_image = position_images.get(position_list[n])
+                # if vs_adp_list[n] == 0:
+                #     vs_adp_str = '0'
+                # elif vs_adp_list[n] != '':
+                #     vs_adp_str = '-' + str(abs(vs_adp_list[n])) if vs_adp_list[n] < 0 else '+' + str(vs_adp_list[n])
+                # else:
+                #     vs_adp_str = ''
                 player_info = '\t\t\t\t\t\t\t\t<li class="listitem1"><img src={} height=20px><small class="grey"> (T{}) {}&nbsp;</small><a style=' \
-                              '"cursor: pointer;"> {}</a><small class="grey"> {}-{} (vADP: {})</small> <a href="#" class="" fp-player-name="{}"></a></li>\n'.format(position_image, ordered_labels[n], formatted_ranking, name_list[n],  raw_position, position_rank, vs_adp_str, name_list[n])
+                              '"cursor: pointer;"> {}</a><small class="grey"> {} (stdDev: {})</small> <a href="#" class="" fp-player-name="{}"></a></li>\n'.format(position_image, ordered_labels[n], formatted_ranking, name_list[n], position_list[n], formatted_stdDev, name_list[n])
                 destination_html_file.write(player_info)
+                logger.debug(player_info)
             destination_html_file.write(div_stop)
         # write bottom half
         bottomhalf_html_contents = bottomhalf_html_file.read()
@@ -675,8 +683,8 @@ def ffb_weekly_sheet(args, list_of_lists):
 def main(args):
     logger = logging.getLogger()
     # downloading settings
-    position_list = ['qb', 'rb', 'wr', 'te', 'flex', 'k', 'dst']
-    start_week_date = datetime.date(2016, 9, 6)
+    position_list = ['c', 'lw', 'rw', 'd', 'g']
+    start_week_date = datetime.date(2016, 12, 6)
     injured_player_list = []
     clustering_program(args, start_week_date, position_list)
 
@@ -692,6 +700,7 @@ def main(args):
     #     t = Timer(secs, clustering_program(args, start_week_date, position_list))
     #     t.start()
 
+# cd "/Users/joel8641/Downloads/fhtiers-python-master/src/ff-tiers.py" && py -3 "ff-tiers.py" -u "whitneyjb5" -p "999jbw" -t "reiHrx0n5o7YstOIFsZ5Gj29UVuuC80z"
 
 if __name__ == "__main__":    # get all of the commandline arguments
     parser = argparse.ArgumentParser("FantasyPros clustering program")
@@ -701,10 +710,10 @@ if __name__ == "__main__":    # get all of the commandline arguments
     parser.add_argument('-t', dest='token', help="FantasyPros token", required=True)
     # optional parameters
     parser.add_argument('-down', dest='download_data', help="Boolean for if script should download data", default="True")
-    parser.add_argument('-dat', dest='data_directory', help="The directory where the data is downloaded", default="data/fftiers/2016/")
-    parser.add_argument('-plot', dest='plots_directory', help="The directory where the plots are saved", default="plots/fftiers/2016/")
-    parser.add_argument('-draft', dest='ffbdraft_directory', help="The directory where the draft html is saved", default="ffbdraft/")
-    parser.add_argument('-weekly', dest='ffbweekly_directory', help="The directory where the weekly html is saved", default="ffbweekly/")
+    parser.add_argument('-dat', dest='data_directory', help="The directory where the data is downloaded", default="data/fhtiers/2016/")
+    parser.add_argument('-plot', dest='plots_directory', help="The directory where the plots are saved", default="plots/fhtiers/2016/")
+    parser.add_argument('-draft', dest='ffbdraft_directory', help="The directory where the draft html is saved", default="ffhdraft/")
+    parser.add_argument('-weekly', dest='ffbweekly_directory', help="The directory where the weekly html is saved", default="ffhweekly/")
     # required for logging
     parser.add_argument('-logFile', dest='logFile', help='The log file to use', default="log.txt")
     args = parser.parse_args()
