@@ -15,7 +15,7 @@
 	<body>
 		<nav class="navbar navbar-dark bg-inverse">
   		<!-- Navbar content -->
-			<a style="color: white; font-weight: bold;">Fantasy Football Draft Sheet</a>
+			<a style="color: white; font-weight: bold;">Fantasy Football Weekly Sheet</a>
 		</nav>
 		<header>
 			</br></br>
@@ -38,11 +38,11 @@
 			</div>
 			<div class="row">
 				<ul class="tab">
-		          <li><a href="#" class="tablinks active" onclick="openCity(event, 'Draft Sheet')">Draft Sheet</a></li>
+		          <li><a href="#" class="tablinks active" onclick="openCity(event, 'Draft Sheet')">Rest of Season Sheet</a></li>
 		          <li><a href="#" class="tablinks" onclick="openCity(event, 'About')">About</a></li>
 		        </ul>
 		        <ul class="tab">
-		          <li><a href="#" class="tablinks" onclick="openCity(event, 'Overall')">Overall</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'Rest of Season')">Rest of Season</a></li>
 		          <li><a href="#" class="tablinks" onclick="openCity(event, 'QB')">QB</a></li>
 		          <li><a href="#" class="tablinks" onclick="openCity(event, 'RB')">RB</a></li>
 		          <li><a href="#" class="tablinks" onclick="openCity(event, 'WR')">WR</a></li>

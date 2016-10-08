@@ -3,11 +3,11 @@
         </div>
         <div id="About" class="tabcontent">
           <h4>About</h4></br></br>
-          <p2>This website is meant to serve as a draft aid for Fantasy Football. The website inludes an interactive draft sheet as well as overall and positional ranking-graphs.</p2></br>
-          <p2>Players are assigned tiers, for which players within a like-tier can be considered equals. This concept was expanded from Boris Chen's work, which can be found here (http://www.borischen.co/).</p2></br>
+          <p2>This website is meant to serve as a weekly aid for Fantasy Football. The website includes an interactive sheet for viewing rest-of-season rankings compared to owned players, as well as rest-of-season and weekly positional ranking-graphs.</p2></br>
+          <p2>Players are assigned tiers, for which players within a like-tier can be considered equals. This aid can be used to decide which players to pick-up via free agency and which players to start on a weekly basis. This concept was expanded from Boris Chen's work, which can be found here (http://www.borischen.co/).</p2></br>
           <p2>This program utilizes unsupervised machine learning by flat clustering with KMeans -- a simple way to uncover like tiers within the player data mined from FantasyPros (http://www.fantasypros.com/).</p2></br>
         </div>
-        <div id="Overall" class="tabcontent">
+        <div id="Rest of Season" class="tabcontent">
 	      	<ul class="tab2">
 	          <li><a href="#" class="tablinks2 active2" onclick="openMinor(event, '1-60')">1-60</a></li>
 	          <li><a href="#" class="tablinks2" onclick="openMinor(event, '61-120')">61-120</a></li>
@@ -16,16 +16,19 @@
 	        <div id="1-60" class="tabcontent2" style="display: block;">
 	          <div id="holder">
 	            <li><img src="images/ros-overall-raw-1.png"></li>
+	            <p2><b>UNDER CONSTRUCTION</b></p2></br>
 	          </div>
 	        </div>
 	        <div id="61-120" class="tabcontent2">
 	          <div id="holder">
 	            <li><img src="images/ros-overall-raw-2.png"></li>
+	            <p2><b>UNDER CONSTRUCTION</b></p2></br>
 	          </div>
 	        </div>
 	        <div id="121-200" class="tabcontent2">
 	          <div id="holder">
 	            <li><img src="images/ros-overall-raw-3.png"></li>
+	            <p2><b>UNDER CONSTRUCTION</b></p2></br>
 	          </div>
 	        </div>	        	        
         </div>

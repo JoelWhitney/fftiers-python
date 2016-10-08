@@ -1,0 +1,21 @@
+WINDOWS
+download and upload (full program)
+cd "C:\Users\Joel\Dropbox\Projects\FF Tiers\fftiers-python\src" && py -3 "ff-tiers.py"
+
+download - no upload (to check core program functionality)
+cd "C:\Users\Joel\Dropbox\Projects\FF Tiers\fftiers-python\src" && py -3 "ff-tiers.py" -upload "False"
+
+no download - no upload (to check clustering/plotting on already downloaded data)
+cd "C:\Users\Joel\Dropbox\Projects\FF Tiers\fftiers-python\src" && py -3 "ff-tiers.py" -down "False" -upload "False"
+
+
+MACOSX
+download and upload (full program)
+cd "/Users/joel8641/Dropbox/Projects/FF Tiers/fftiers-python/src" && python3.5 "ff-tiers.py"
+
+download - no upload (to check core program functionality)
+cd "/Users/joel8641/Dropbox/Projects/FF Tiers/fftiers-python/src" && python3.5 "ff-tiers.py" -upload "False"
+
+no download - no upload (to check clustering/plotting on already downloaded data)
+cd "/Users/joel8641/Dropbox/Projects/FF Tiers/fftiers-python/src" && python3.5 "ff-tiers.py" -down "False" -upload "False"
+

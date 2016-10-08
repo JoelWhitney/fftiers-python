@@ -15,10 +15,13 @@ To Do's
     -once v timed runtime
 -Make this program work with NHL data for Fantasy Hockey
 '''
+import ftplib
 import argparse
+import json
 import requests
 from lxml import html
 import traceback
+import time
 import os
 import logging
 import logging.handlers
@@ -33,7 +36,6 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm
 from matplotlib import style
 style.use("ggplot")
-import time
 
 
 def initialize_logging(logFile):
@@ -45,16 +47,13 @@ def initialize_logging(logFile):
          [%(threadName)5s] [%(name)10.10s] [%(levelname)8s] %(message)s")  # The format for the logs
     logger = logging.getLogger()  # Grab the root logger
     logger.setLevel(logging.DEBUG)  # Set the root logger logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-    # Create a handler to print to the console
     sh = logging.StreamHandler(sys.stdout)
     sh.setFormatter(formatter)
     sh.setLevel(logging.DEBUG)
-    # Create a handler to log to the specified file
     rh = logging.handlers.RotatingFileHandler(logFile, mode='a', maxBytes=10485760)
     rh.setFormatter(formatter)
     rh.setLevel(logging.DEBUG)
-    # Add the handlers to the root logger
-    logger.addHandler(sh)
+    logger.addHandler(sh)  # Add the handlers to the root logger
     logger.addHandler(rh)
 
 
@@ -75,6 +74,110 @@ def verify_file_path(filePath):
         return True
 
 
+def get_nfl_week(start_week_date):
+    """
+    get the nfl_week
+    :param start_week_date: date object for Tuesday before 1st Thursday game
+    :return: week: integer
+    """
+    week = 0
+    today_date = datetime.datetime.now().date()
+    if today_date >= start_week_date:
+        difference_days = today_date - start_week_date
+        week = int((difference_days.days / 7) + 1)
+        return week
+    else:
+        return week
+
+
+def download_nfl_data(args, week, position_list):
+    """
+    download xls file from fantasy pros to the data_directory specified in args
+    TODO: should have list of players and their ID's from FP to join when calling csv_from_excel()
+    TODO: two logins for each league in args. Iterate over both and download JSON to be parsed.; use position list not the ones below
+    :param args: list of parameters can be used to get data directories
+    :param week: integer week to be used when building file names
+    :param position_list: list of positions to download, also used to build file names
+    """
+    logger = logging.getLogger()
+    try:
+        download_data = args.download_data
+        if download_data == "True":
+            if week == 0:
+                league = args.fp_credentials.get("league_1")
+                preseason_rankings = ["consensus", "qb", "rb", "wr", "te", "k", "dst"]
+                preseason_filename = ["overall", "qb", "rb", "wr", "te", "k", "dst"]
+                for item_position in range(len(preseason_rankings)):
+                    save_file = os.path.join(args.data_directory,'week-0-preseason-{}-raw.xls'.format(preseason_filename[item_position]))
+                    url = 'https://www.fantasypros.com/nfl/rankings/{}-cheatsheets.php?export=xls'.format(preseason_rankings[item_position])
+                    logger.debug("Starting session download...")
+                    perform_session_download(league, url, save_file)
+                    logger.debug("Starting xls conversion...")
+                    csv_from_excel(save_file)
+            else:
+                for position in position_list:
+                    filename = 'week-{}-{}-raw.xls'.format(str(week), position)
+                    save_file = os.path.join(args.data_directory, filename)
+                    url = 'http://www.fantasypros.com/nfl/rankings/{}.php?export=xls'.format(position)
+                    logger.debug("Starting session download...")
+                    perform_session_download(args, url, save_file)
+                    logger.debug("Starting xls conversion...")
+                    csv_from_excel(save_file)
+                logger.debug("Starting download for ROS positions...")
+                ros_rankings = ["overall", "qb", "rb", "wr", "te", "flex", "k", "dst"]
+                for position in ros_rankings:
+                    ros_url = "https://www.fantasypros.com/nfl/rankings/ros-{}.php?export=xls".format(position)
+                    filename = 'week-{}-{}-ros.xls'.format(str(week), position)
+                    save_file = os.path.join(args.data_directory, filename)
+                    logger.debug("Starting session download...")
+                    perform_session_download(args.fp_credentials.get('league_{}'.format(index)), ros_url, save_file)
+                logger.debug("Starting download for JSONs...")
+                for index in range(len(args.fp_credentials)):
+                    download_league_json = "https://partners.fantasypros.com/api/v1/mpb-leagues.php?callback=callback&sport=nfl&callback=jQuery2220588897147426499_1473771357333&_=1473771357334"
+                    save_file_json = "week-{}-league-{}.json".format(week, index)
+                    logger.debug("Starting session download for JSON...")
+                    perform_session_download(args.fp_credentials.get('league_{}'.format(index)), download_league_json, save_file_json)
+
+                    # add ros-overall to position list?? What's the url like
+    except Exception as e:
+        logger.info("Generic download and conversion failed with: {}".format(e))
+
+
+def perform_session_download(league, url, save_file):
+    """
+    creates a session that allows the user to log in to FantasyPros and use the tokens
+    :param args: list of parameters can be used to get data directories
+    :param url: string of the export xls url
+    :param save_file: string of the full file path and name of file to be saved
+    """
+    logger = logging.getLogger()
+    try:
+        login_url = "https://secure.fantasypros.com/accounts/login/?"
+        payload = {"username": league.get('username'),
+                   "password": league.get('password'),
+                   "csrfmiddlewaretoken": league.get('token')}
+        logger.debug("Starting download session...")
+        session_requests = requests.session()
+        result = session_requests.get(login_url)
+        tree = html.fromstring(result.text)
+        logger.debug("Updating token...")
+        authenticity_token = list(set(tree.xpath("//input[@name='csrfmiddlewaretoken']/@value")))[0]
+        payload["csrfmiddlewaretoken"] = authenticity_token
+        session_requests.post(login_url,
+                              data=payload,
+                              headers=dict(referer=login_url))
+        logger.debug("Opening file to write data...")
+        with open(save_file, 'wb') as handle:
+            response = session_requests.get(url)
+            if not response.ok:
+                logger.info("Writing to xls failed...")
+            for block in response.iter_content(1024):
+                handle.write(block)
+            logger.debug("Writing to file succeeded for: {}...".format(save_file))
+    except Exception as e:
+        logger.info("Session download failed with: {}".format(e))
+
+
 def csv_from_excel(full_file_name):
     """
     converts old xls to csv using this roundabout method
@@ -87,132 +190,67 @@ def csv_from_excel(full_file_name):
             with open(full_file_name, 'r') as xlsfile, open(full_file_name[:-4] + '.csv', 'w', newline="\n", encoding="utf-8") as csv_file:
                 xls_reader = csv.reader(xlsfile, delimiter='\t')
                 csv_writer = csv.writer(csv_file)
-                # skip first five lines
-                for i in range(5):
+                # for headerLine in range(4):
+                #     next(xls_reader, None)
+                for headerLine in range(5):
                     next(xls_reader, None)
-                # write subsequent rows to csv file
-                for row in xls_reader:
-                    csv_writer.writerow(row)
-                logger.debug("Conversion succeeded...")
+
+                pos_headers = ["rank", "player name", "team", "matchup", "best rank", "worst rank", "avg rank", "std dev"]
+                flex_headers = ["rank", "player name", "pos", "team", "matchup", "best rank", "worst rank", "avg rank", "std dev"]
+                tup = flex_headers if "flex" in full_file_name.lower() else pos_headers
+                csv_writer.writerow(tup)
+
+                for tup in xls_reader:
+                    csv_writer.writerow(tup)
+                logger.debug("Conversion succeeded for: {}...".format(full_file_name))
         else:
-            logger.info("XLS file not found for: {} Skipping file...".format(full_file_name))
+            logger.info("XLS file not found for: {}... Skipping file...".format(full_file_name))
     except Exception as e:
         logger.info("Conversion failed with: {}".format(e))
 
 
-def get_nfl_week(start_week_date):
+def data_from_csv(position, week, data_directory):
     """
-    get the nfl_week
-    :param start_week_date: date object for Tuesday before 1st Thursday game
-    :return: week: integer
-    """
-    week = 0
-    today_date = datetime.datetime.now().date()
-    if today_date >= start_week_date:
-        # get days passed start date as date object
-        difference_days = today_date - start_week_date
-        # calculate week
-        week = int((difference_days.days / 7) + 1)
-        return week
-    else:
-        return week
-
-
-def perform_session_download(args, url, full_file_name):
-    """
-    creates a session that allows the user to log in to FantasyPros and use the tokens
-    :param args: list of parameters can be used to get data directories
-    :param url: string of the export xls url
-    :param full_file_name: string of the full file path and name of file to be saved
+    **NEW - IN PROGRESS** builds dictionary of lists from the csv to be used in the graphing
+    TODO: what about vADP I use in draft sheet (see lists_from_csv)
+    :param position: string position used for building csv name
+    :param week: integer week used for building csv name
+    :param data_directory: string data directory used for building csv name
+    :returns: rank_list, name_list, position_list, average_rank_list, standard_deviation_list, vs_adp_list: lists of data
     """
     logger = logging.getLogger()
     try:
-        # get payload values from command line parameters
-        username, password, token = args.username, args.password, args.token
-        payload = {"username": username,
-                   "password": password,
-                   "csrfmiddlewaretoken": token}
-        # start session
-        logger.debug("Starting download session...")
-        session_requests = requests.session()
-        login_url = "https://secure.fantasypros.com/accounts/login/?"
-        result = session_requests.get(login_url)
-        # refresh token on new request
-        tree = html.fromstring(result.text)
-        logger.debug("Updating token...")
-        authenticity_token = list(set(tree.xpath("//input[@name='csrfmiddlewaretoken']/@value")))[0]
-        payload["csrfmiddlewaretoken"] = authenticity_token
-        session_requests.post(login_url,
-                              data=payload,
-                              headers=dict(referer=login_url))
-        # prepare to write data to file
-        logger.debug("Opening xls file to write data...")
-        with open(full_file_name, 'wb') as handle:
-            response = session_requests.get(url)
-            if not response.ok:
-                logger.info("Writing to xls failed...")
-            for block in response.iter_content(1024):
-                handle.write(block)
-            logger.info("Writing to xls succeeded...")
+        headers = {}
+        data = {}
+        filename = 'week-{}-{}-raw.csv'.format(str(week), position)
+        csv_file = os.path.join(data_directory, filename)
+        logger.debug("Trying to find csv file: {}...".format(csv_file))
+        if verify_file_path(csv_file):
+            with open(csv_file, 'r') as csv_file:
+                csv_file = csv.reader(csv_file)
+                for row in csv_file:
+                    logger.debug("Row: {} Data: {}".format(csv_file.line_num, row))
+                    if csv_file.line_num == 1:
+                        for index in range(len(row)):
+                            header = row[index]
+                            print(str(header).lower().strip())
+                            if str(header).lower().strip() != '': headers[str(header).lower().strip()] = index
+                            if str(header).lower().strip() != '': data[str(header).lower().strip()] = []
+                        logger.debug(headers)
+                        logger.debug(data)
+                    else:
+                        for header in headers:
+                            logger.debug("\t\tHeader: {}; Index: {}".format(header, headers.get(header)))
+                            header_index = headers.get(header)
+                            logger.debug("\t\tExisting Data: {}; Type: {}".format(data.get(header), type(data.get(header))))
+                            logger.debug("\t\tData to Add: {}\n\n".format(row[header_index]))
+                            data.get(header).append(row[header_index])
+                    logger.debug(data)
+            return headers, data
+        else:
+            logger.info("CSV file not found for: {} - Week {}. Skipping position...".format(position, week))
     except Exception as e:
-        logger.info("Session download failed with: {}".format(e))
-
-
-def download_nfl_data(args, week, position_list):
-    """
-    download xls file from fantasy pros to the data_directory specified in args
-    :param args: list of parameters can be used to get data directories
-    :param week: integer week to be used when building file names
-    :param position_list: list of positions to download, also used to build file names
-    """
-    logger = logging.getLogger()
-    try:
-        download_data = args.download_data
-        if download_data == "True":
-            # get data directory from command line parameters
-            data_directory = args.data_directory
-            # if preseason
-            if week == 0:
-                preseason_rankings = ['https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/qb-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/rb-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/wr-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/te-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/k-cheatsheets.php?export=xls',
-                                      'https://www.fantasypros.com/nfl/rankings/dst-cheatsheets.php?export=xls']
-                preseason_rankings_names = ['week-0-preseason-overall-raw.xls',
-                                            'week-0-preseason-qb-raw.xls', 'week-0-preseason-rb-raw.xls',
-                                            'week-0-preseason-wr-raw.xls', 'week-0-preseason-te-raw.xls',
-                                            'week-0-preseason-k-raw.xls', 'week-0-preseason-dst-raw.xls']
-                # download each link separately
-                for item_position in range(len(preseason_rankings)):
-                    # prepare link and path/filename
-                    full_file_name = os.path.join(data_directory, preseason_rankings_names[item_position])
-                    url = preseason_rankings[item_position]
-                    # download using sessions
-                    logger.debug("Starting session download...")
-                    perform_session_download(args, url, full_file_name)
-                    # convert the xls to csv
-                    logger.debug("Starting xls conversion...")
-                    csv_from_excel(full_file_name)
-            # if not preseason
-            else:
-                # download each position from the position list
-                for position in position_list:
-                    # prepare link and path/filename
-                    filename = 'week-' + str(week) + '-' + position + '-raw.xls'
-                    full_file_name = os.path.join(data_directory, filename)
-                    url = 'http://www.fantasypros.com/nfl/rankings/' + position + '.php?export=xls'
-                    # download using sessions
-                    logger.debug("Starting session download...")
-                    perform_session_download(args, url, full_file_name)
-                    # convert the xls to csv
-                    logger.debug("Starting xls conversion...")
-                    csv_from_excel(full_file_name)
-                # download ros data
-                # add ros-overall to position list?? What's the url like
-    except Exception as e:
-        logger.info("Generic download and conversion failed with: {}".format(e))
+        logger.info("Building data structure from csv failed with: {}".format(e))
 
 
 def get_position_setting(position, settings):
@@ -224,65 +262,11 @@ def get_position_setting(position, settings):
     :returns: max_num, k_val: positional settings for plotting
     """
     logger = logging.getLogger()
-    # iterate over dictionaries until dictionary for position is found
     for dict in settings:
         if str(dict.get('pos')).lower() == str(position).lower():
             max_num = dict.get('max_num')
             k_val = dict.get('k_val')
     return max_num, k_val
-
-
-def lists_from_csv(position, week, data_directory):
-    """
-    builds lists from the csv to be used in the graphing
-    :param position: string position used for building csv name
-    :param week: integer week used for building csv name
-    :param data_directory: string data directory used for building csv name
-    :returns: rank_list, name_list, position_list, average_rank_list, standard_deviation_list, vs_adp_list: lists of data
-    """
-    logger = logging.getLogger()
-    try:
-        # set up empty lists for data storing
-        rank_list = []
-        name_list = []
-        position_list = []
-        average_rank_list = []
-        standard_deviation_list = []
-        vs_adp_list = []
-        # build path/filename for csv file
-        filename = 'week-' + str(week) + '-' + position + '-raw.csv'
-        full_file_name = os.path.join(data_directory, filename)
-        logger.debug("Trying to find csv file: {}...".format(full_file_name))
-        # verify can find file before trying to process data
-        if verify_file_path(full_file_name):
-            # set up csv file to read
-            with open(full_file_name, 'r') as csv_file:
-                csv_reader = csv.reader(csv_file)
-                # iterate over each row adding column to appropriate list
-                for row in csv_reader:
-                    rank_list.append(int(row[0]))
-                    name_list.append(str(row[1]))
-                    # preseason-overall includes position column, this accounts for it
-                    if position == 'preseason-overall' or position == 'flex':
-                        position_list.append(str(row[2]))
-                        average_rank_list.append(float(row[7]))
-                        standard_deviation_list.append(float(row[8]))
-                        if row[9] != '' and row[0] != '':
-                            vADP = int(row[9]) - int(row[0])
-                            vs_adp_list.append(vADP)
-                        else: vs_adp_list.append('')
-                    # all other positions will use this
-                    else:
-                        position_list.append(str(position))
-                        average_rank_list.append(float(row[6]))
-                        standard_deviation_list.append(float(row[7]))
-                        vs_adp_list.append('')
-            list_of_lists = [rank_list, name_list, position_list, average_rank_list, standard_deviation_list, vs_adp_list]
-            return list_of_lists
-        else:
-            logger.info("CSV file not found for: {} - Week {}. Skipping position...".format(position, week))
-    except Exception as e:
-        logger.info("Building lists from csv failed with: {}".format(e))
 
 
 def get_cluster_settings(week):
@@ -327,7 +311,7 @@ def get_cluster_settings(week):
     return type_cluster_settings, ros_settings
 
 
-def plot(position, week, args):
+def plot(args, position, week):
     """
     the first stage of the plotting that prepares the data to then be cluster_and_plotted
     TODO's: logging, utilize get_position_settings for preseason data, merge ros/preseason preparation
@@ -337,16 +321,17 @@ def plot(position, week, args):
     """
     logger = logging.getLogger()
     logger.info("Plotting {} for Week {}".format(position.upper(), week))
-    plot_filename = 'week-' + str(week) + '-' + position + '-raw.png'
+    plot_filename = 'week-{}-{}-raw.png'.format(str(week), position)
     title = "Preseason - {} Tiers - {}".format(position[10:].upper(), time.strftime("%Y-%m-%d %H:%M")) if week == 0 else \
         "Week {} - {} Tiers - {}".format(week, position.upper(), time.strftime("%Y-%m-%d %H:%M"))
     data_directory = args.data_directory
-    # get the cluster settings
     type_cluster_settings, ros_cluster_settings = get_cluster_settings(week)
-    # get preseason settings
+    headers, data = data_from_csv(position, week, data_directory)
+    if 'overall' not in position: max_number, k_value = get_position_setting(position, type_cluster_settings)
     if week == 0:
-        list_of_lists = lists_from_csv(position, week, data_directory)
-        # split lists for pos == overall
+        list_of_lists = [data.get('rank'), data.get('player name'), [position] * len(data.get('rank')),
+                         data.get('avg rank'), data.get('std dev'), data.get('adp')]
+        logger.debug(list_of_lists)
         if position == 'preseason-overall':
             for dict in type_cluster_settings:
                 if dict.get('pos') == 'preseason-overall':
@@ -377,14 +362,15 @@ def plot(position, week, args):
                     web_list_of_lists.append(ordered_labels[start1:stop3])
                     ffb_draft_sheet(args, web_list_of_lists)
         else:
-            max_number, k_value = get_position_setting(position, type_cluster_settings)
             plot_1 = []
             for list in list_of_lists: plot_1.append(list[0:max_number])
             plot_1.append(k_value)
             plot_list_of_lists = [plot_1]
             cluster_and_plot(plot_list_of_lists, plot_filename, title, args)
     else:
-        list_of_lists = lists_from_csv(position, week, data_directory)
+        list_of_lists = [data.get('rank'), data.get('player name'), [position] * len(data.get('rank')),
+                         data.get('avg rank'), data.get('std dev')]
+        logger.debug(list_of_lists)
         if position == 'ros-overall':
             for dict in type_cluster_settings:
                 if dict.get('pos') == 'ros-overall':
@@ -415,10 +401,10 @@ def plot(position, week, args):
                     web_list_of_lists.append(ordered_labels[start1:stop3])
                     # ffb_weekly_sheet(args, web_list_of_lists)  # need the data to build this and delete 420/421
         else:
-            max_number, k_value = get_position_setting(position, type_cluster_settings)
             plot_1 = []
             for list in list_of_lists: plot_1.append(list[0:max_number])
             plot_1.append(k_value)
+            logger.debug(plot_1)
             plot_list_of_lists = [plot_1]
             cluster_and_plot(plot_list_of_lists, plot_filename, title, args)
         web_list_of_lists = [[],[],[],[],[]]
@@ -450,7 +436,7 @@ def cluster_and_plot(list_of_lists, raw_plot_filename, title, args):
         webplots_directory = args.ffbdraft_directory + "images/" if webplot_filename_split[1] == '0' else args.ffbweekly_directory + "images/"
         webplot_full_file_name = os.path.join(webplots_directory, webplot_filename)
         # assign lists
-        rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[6]
+        rank_list, name_list, position_list, average_rank_list, standard_deviation_list, k_value = list[0], list[1], list[2], list[3], list[4], list[5]
         # empty list that will be converted into array
         average_rank_array = []
         for n in range(len(average_rank_list)):
@@ -476,12 +462,17 @@ def cluster_and_plot(list_of_lists, raw_plot_filename, title, args):
         for i in range(len(labels)):
             c = next(color_cycle)
             colors.append(c)
+
+
         # iterate over array and plot values, standard deviation, and color by clusters
         for i in range(len(X)):
-            plt.errorbar(X[i][0], rank_list[i], xerr=standard_deviation_list[i], marker='.', markersize=4, color=colors[labels[i]], ecolor=colors[labels[i]])
+            logger.debug(type(X[i][0]))
+            logger.debug(type(rank_list[i]))
+            logger.debug(type(standard_deviation_list[i]))
+            plt.errorbar(float(X[i][0]), float(rank_list[i]), xerr=float(standard_deviation_list[i]), marker='.', markersize=4, color=colors[labels[i]], ecolor=colors[labels[i]])
             position = position_list[i][10:].upper() if len(position_list[i]) > 10 else position_list[i].upper()
-            plt.text(X[i][0] + standard_deviation_list[i] + 1, rank_list[i], "{} {} ({})".format(name_list[i], position, rank_list[i]), size=6, color=colors[labels[i]],
-                     ha="left", va="center")
+            # plt.text(str(X[i][0] + standard_deviation_list[i] + 1), str(rank_list[i]), "{} {} ({})".format(name_list[i], position, str(rank_list[i])), size=6, color=colors[labels[i]], ha="left", va="center")
+            plt.text(float(X[i][0]) + float(standard_deviation_list[i]) + 1, float(rank_list[i]), "{} {} ({})".format(name_list[i], position, str(rank_list[i])), size=6, color=colors[labels[i]], ha="left", va="center")
         axes = plt.gca()
         axes.set_axis_bgcolor('#3A3A3A')
 
@@ -509,17 +500,6 @@ def clustering_program(args, start_week_date, position_list):
     :param start_week_date: date object for start of season
     :param position_list: list of positions to be used
     """
-    # week = get_nfl_week(start_week_date)
-    # if week == 0:
-    #     position_list.remove('flex') & position_list.insert(0, 'overall')
-    #     download_nfl_data(args, week, position_list)
-    #     for pos in position_list:
-    #         preseason_pos = 'preseason-{}'.format(pos)
-    #         plot(preseason_pos, week, args)
-    # else:
-    #     download_nfl_data(args, week, position_list)
-    #     for pos in position_list:
-    #         plot(pos, week, args)
     logger = logging.getLogger()
     week = get_nfl_week(start_week_date)
     adjust_position_list = position_list
@@ -529,11 +509,14 @@ def clustering_program(args, start_week_date, position_list):
         download_nfl_data(args, week, position_list)
         for pos in position_list:
             preseason_pos = 'preseason-{}'.format(pos)
-            plot(preseason_pos, week, args)
+            plot(args, preseason_pos, week)
+        if args.upload_site == "True": ftp_upload(args, args.ffbdraft_directory)
+
     else:
         download_nfl_data(args, week, position_list)
         for pos in position_list:
-            plot(pos, week, args)
+            plot(args, pos, week)
+        if args.upload_site == "True": ftp_upload(args, args.ffbweekly_directory)
 
 
 def reorder_labels(unordered_labels):
@@ -622,7 +605,7 @@ def ffb_draft_sheet(args, list_of_lists):
 
 
 def ffb_weekly_sheet(args, list_of_lists):
-    """
+    """=
 
     :param args:
     :param list_of_lists:
@@ -672,6 +655,65 @@ def ffb_weekly_sheet(args, list_of_lists):
         destination_html_file.write(bottomhalf_html_contents)
 
 
+def ftp_upload_sub(ftp, path):
+    """
+    recursively handles any subfolders from ftp_upload(directory)
+    :param ftp:
+    :param path:
+    :return:
+    """
+    ftp.retrlines('LIST')
+    # print starting working directory
+    files = os.listdir(path)
+    os.chdir(path)
+    print("Current working dir : {}".format(os.getcwd()))
+    for f in files:
+        print("Item : {}".format(f))
+        if os.path.isfile(f):
+            fh = open(f, 'rb')
+            ftp.storbinary('STOR %s' % f, fh)
+            fh.close()
+        elif os.path.isdir(f):
+            ftp.mkd(f)
+            ftp.cwd(f)
+            ftp_upload_sub(ftp, path)
+            ftp.cwd('..')
+            os.chdir('..')
+
+
+def ftp_upload(args, path):
+    """
+    start the upload on the core working directory
+    :param args:
+    :param path:
+    :return:
+    """
+    ftp_address = args.ftp_address
+    ftp_username = path[:-1] + "@" + ftp_address
+    ftp_password = args.ftp_password
+    # print ftp home directory
+    ftp = ftplib.FTP(ftp_address, ftp_username, ftp_password)
+    ftp.retrlines('NLST')
+    files = os.listdir(path)
+    os.chdir(path)
+    print("Current working dir : {}".format(os.getcwd()))
+    # iterate over files in working directory
+    for f in files:
+        print("Item : {}".format(f))
+        if os.path.isfile(f):
+            fh = open(f, 'rb')
+            ftp.storbinary('STOR %s' % f, fh)
+            fh.close()
+        elif os.path.isdir(f):
+            print(f)
+            try: ftp.mkd(f)
+            except: pass
+            ftp.cwd(f)
+            ftp_upload_sub(ftp, f)
+            ftp.cwd('..')
+            os.chdir('..')
+
+
 def main(args):
     logger = logging.getLogger()
     # downloading settings
@@ -696,11 +738,10 @@ def main(args):
 if __name__ == "__main__":    # get all of the commandline arguments
     parser = argparse.ArgumentParser("FantasyPros clustering program")
     # required parameters
-    parser.add_argument('-u', dest='username', help="FantasyPros username", required=True)
-    parser.add_argument('-p', dest='password', help="FantasyPros password", required=True)
-    parser.add_argument('-t', dest='token', help="FantasyPros token", required=True)
+    parser.add_argument('-cred', dest='credentials', help='Pickle file that has credentials', default='credentials.p')
     # optional parameters
     parser.add_argument('-down', dest='download_data', help="Boolean for if script should download data", default="True")
+    parser.add_argument('-upload', dest='upload_site', help="Boolean for if script should uploaded", default="True")
     parser.add_argument('-dat', dest='data_directory', help="The directory where the data is downloaded", default="data/fftiers/2016/")
     parser.add_argument('-plot', dest='plots_directory', help="The directory where the plots are saved", default="plots/fftiers/2016/")
     parser.add_argument('-draft', dest='ffbdraft_directory', help="The directory where the draft html is saved", default="ffbdraft/")
