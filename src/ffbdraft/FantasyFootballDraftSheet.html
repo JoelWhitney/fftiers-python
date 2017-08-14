@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<title>Fantasy Football Draft Sheet</title>
+ 		<!-- Required meta tags always come first -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.hideseek.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="draftsheet.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-dark bg-inverse">
+  		<!-- Navbar content -->
+			<a style="color: white; font-weight: bold;">Fantasy Football Draft Sheet</a>
+		</nav>
+		<header>
+			</br></br>
+			</br></br>
+			</br></br>
+		</header>
+
+		<div class="container-fluid positionsbar" id="wrap">
+			<div class="row">
+				<div class="positionbts">
+					<ul>
+						<li><img class="buttonspos quarterbackbt" src="images/quarterbackbt.png"></li>
+						<li><img class="buttonspos runningbackbt" src="images/runningbackbt.png"></li>
+						<li><img class="buttonspos receiverbt" src="images/receiverbt.png"></li>
+						<li><img class="buttonspos tightendbt" src="images/tightendbt.png"></li>
+						<li><img class="buttonspos defensebt" src="images/defensebt.png"></li>
+						<li><img class="buttonspos kickerbt" src="images/kickerbt.png"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="tab">
+		          <li><a href="#" class="tablinks active" onclick="openCity(event, 'Draft Sheet')">Draft Sheet</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'About')">About</a></li>
+		        </ul>
+		        <ul class="tab">
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'Overall')">Overall</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'QB')">QB</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'RB')">RB</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'WR')">WR</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'TE')">TE</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'DST')">DST</a></li>
+		          <li><a href="#" class="tablinks" onclick="openCity(event, 'K')">K</a></li>
+		        </ul>
+		    </div>
+		</div>
+        <div id="Draft Sheet" class="tabcontent" style="display: block;">
+			<div class="container-fluid">
+                <div class="row">				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T1) 1.3&nbsp;</small><a style="cursor: pointer;"> David Johnson ARI </a><small class="grey"> RB-1 (vADP: 0)</small> <a href="#" class="" fp-player-name="David Johnson ARI "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T1) 1.7&nbsp;</small><a style="cursor: pointer;"> Le'Veon Bell PIT </a><small class="grey"> RB-2 (vADP: 0)</small> <a href="#" class="" fp-player-name="Le'Veon Bell PIT "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T1) 3.7&nbsp;</small><a style="cursor: pointer;"> Antonio Brown PIT </a><small class="grey"> WR-1 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Antonio Brown PIT "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T1) 5.6&nbsp;</small><a style="cursor: pointer;"> Odell Beckham Jr. NYG </a><small class="grey"> WR-2 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Odell Beckham Jr. NYG "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T1) 6.2&nbsp;</small><a style="cursor: pointer;"> LeSean McCoy BUF </a><small class="grey"> RB-3 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="LeSean McCoy BUF "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T1) 6.3&nbsp;</small><a style="cursor: pointer;"> Julio Jones ATL </a><small class="grey"> WR-3 (vADP: -1.0)</small> <a href="#" class="" fp-player-name="Julio Jones ATL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T2) 8.6&nbsp;</small><a style="cursor: pointer;"> Melvin Gordon LAC </a><small class="grey"> RB-4 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Melvin Gordon LAC "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T2) 9.3&nbsp;</small><a style="cursor: pointer;"> A.J. Green CIN </a><small class="grey"> WR-4 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="A.J. Green CIN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T2) 9.6&nbsp;</small><a style="cursor: pointer;"> Mike Evans TB </a><small class="grey"> WR-5 (vADP: -1.0)</small> <a href="#" class="" fp-player-name="Mike Evans TB "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T2) 10.6&nbsp;</small><a style="cursor: pointer;"> Devonta Freeman ATL </a><small class="grey"> RB-5 (vADP: 0)</small> <a href="#" class="" fp-player-name="Devonta Freeman ATL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T2) 11.6&nbsp;</small><a style="cursor: pointer;"> Jordy Nelson GB </a><small class="grey"> WR-6 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Jordy Nelson GB "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T2) 12.6&nbsp;</small><a style="cursor: pointer;"> Jay Ajayi MIA </a><small class="grey"> RB-6 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Jay Ajayi MIA "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T2) 14.4&nbsp;</small><a style="cursor: pointer;"> DeMarco Murray TEN </a><small class="grey"> RB-7 (vADP: -1.0)</small> <a href="#" class="" fp-player-name="DeMarco Murray TEN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T2) 15.0&nbsp;</small><a style="cursor: pointer;"> Michael Thomas NO </a><small class="grey"> WR-7 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Michael Thomas NO "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T2) 13.2&nbsp;</small><a style="cursor: pointer;"> Jordan Howard CHI </a><small class="grey"> RB-8 (vADP: -1.0)</small> <a href="#" class="" fp-player-name="Jordan Howard CHI "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T3) 18.0&nbsp;</small><a style="cursor: pointer;"> T.Y. Hilton IND </a><small class="grey"> WR-8 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="T.Y. Hilton IND "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T3) 18.4&nbsp;</small><a style="cursor: pointer;"> Dez Bryant DAL </a><small class="grey"> WR-9 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Dez Bryant DAL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T3) 19.9&nbsp;</small><a style="cursor: pointer;"> Todd Gurley LAR </a><small class="grey"> RB-9 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Todd Gurley LAR "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T3) 20.6&nbsp;</small><a style="cursor: pointer;"> Leonard Fournette JAC </a><small class="grey"> RB-10 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Leonard Fournette JAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T3) 21.3&nbsp;</small><a style="cursor: pointer;"> Ezekiel Elliott DAL </a><small class="grey"> RB-11 (vADP: -17.0)</small> <a href="#" class="" fp-player-name="Ezekiel Elliott DAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T3) 22.3&nbsp;</small><a style="cursor: pointer;"> Amari Cooper OAK </a><small class="grey"> WR-10 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Amari Cooper OAK "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T3) 23.2&nbsp;</small><a style="cursor: pointer;"> Doug Baldwin SEA </a><small class="grey"> WR-11 (vADP: +6.0)</small> <a href="#" class="" fp-player-name="Doug Baldwin SEA "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T4) 24.9&nbsp;</small><a style="cursor: pointer;"> Lamar Miller HOU </a><small class="grey"> RB-12 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Lamar Miller HOU "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T4) 25.4&nbsp;</small><a style="cursor: pointer;"> Rob Gronkowski NE </a><small class="grey"> TE-1 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Rob Gronkowski NE "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T4) 26.0&nbsp;</small><a style="cursor: pointer;"> Isaiah Crowell CLE </a><small class="grey"> RB-13 (vADP: +5.0)</small> <a href="#" class="" fp-player-name="Isaiah Crowell CLE "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T4) 29.2&nbsp;</small><a style="cursor: pointer;"> DeAndre Hopkins HOU </a><small class="grey"> WR-12 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="DeAndre Hopkins HOU "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T4) 29.8&nbsp;</small><a style="cursor: pointer;"> Brandin Cooks NE </a><small class="grey"> WR-13 (vADP: 0)</small> <a href="#" class="" fp-player-name="Brandin Cooks NE "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T5) 31.7&nbsp;</small><a style="cursor: pointer;"> Demaryius Thomas DEN </a><small class="grey"> WR-14 (vADP: +4.0)</small> <a href="#" class="" fp-player-name="Demaryius Thomas DEN "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T5) 33.8&nbsp;</small><a style="cursor: pointer;"> Aaron Rodgers GB </a><small class="grey"> QB-1 (vADP: -12.0)</small> <a href="#" class="" fp-player-name="Aaron Rodgers GB "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T5) 34.0&nbsp;</small><a style="cursor: pointer;"> Allen Robinson JAC </a><small class="grey"> WR-15 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Allen Robinson JAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T5) 34.7&nbsp;</small><a style="cursor: pointer;"> Carlos Hyde SF </a><small class="grey"> RB-14 (vADP: +4.0)</small> <a href="#" class="" fp-player-name="Carlos Hyde SF "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T5) 35.4&nbsp;</small><a style="cursor: pointer;"> Marshawn Lynch OAK </a><small class="grey"> RB-15 (vADP: -9.0)</small> <a href="#" class="" fp-player-name="Marshawn Lynch OAK "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T6) 36.7&nbsp;</small><a style="cursor: pointer;"> Alshon Jeffery PHI </a><small class="grey"> WR-16 (vADP: 0)</small> <a href="#" class="" fp-player-name="Alshon Jeffery PHI "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T6) 38.0&nbsp;</small><a style="cursor: pointer;"> Tom Brady NE </a><small class="grey"> QB-2 (vADP: -9.0)</small> <a href="#" class="" fp-player-name="Tom Brady NE "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T6) 38.4&nbsp;</small><a style="cursor: pointer;"> Travis Kelce KC </a><small class="grey"> TE-2 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Travis Kelce KC "></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T6) 38.7&nbsp;</small><a style="cursor: pointer;"> Terrelle Pryor WAS </a><small class="grey"> WR-17 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Terrelle Pryor WAS "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T7) 40.5&nbsp;</small><a style="cursor: pointer;"> Davante Adams GB </a><small class="grey"> WR-18 (vADP: +10.0)</small> <a href="#" class="" fp-player-name="Davante Adams GB "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T7) 40.7&nbsp;</small><a style="cursor: pointer;"> Joe Mixon CIN </a><small class="grey"> RB-16 (vADP: -2.0)</small> <a href="#" class="" fp-player-name="Joe Mixon CIN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T7) 41.8&nbsp;</small><a style="cursor: pointer;"> Keenan Allen LAC </a><small class="grey"> WR-19 (vADP: +2.0)</small> <a href="#" class="" fp-player-name="Keenan Allen LAC "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T7) 42.3&nbsp;</small><a style="cursor: pointer;"> Drew Brees NO </a><small class="grey"> QB-3 (vADP: 0)</small> <a href="#" class="" fp-player-name="Drew Brees NO "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T7) 43.3&nbsp;</small><a style="cursor: pointer;"> Sammy Watkins LAR </a><small class="grey"> WR-20 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="Sammy Watkins LAR "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T7) 43.8&nbsp;</small><a style="cursor: pointer;"> Ty Montgomery GB </a><small class="grey"> RB-17 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Ty Montgomery GB "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T7) 44.9&nbsp;</small><a style="cursor: pointer;"> Michael Crabtree OAK </a><small class="grey"> WR-21 (vADP: +6.0)</small> <a href="#" class="" fp-player-name="Michael Crabtree OAK "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T8) 47.2&nbsp;</small><a style="cursor: pointer;"> Christian McCaffrey CAR </a><small class="grey"> RB-18 (vADP: -13.0)</small> <a href="#" class="" fp-player-name="Christian McCaffrey CAR "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T8) 49.0&nbsp;</small><a style="cursor: pointer;"> Dalvin Cook MIN </a><small class="grey"> RB-19 (vADP: +5.0)</small> <a href="#" class="" fp-player-name="Dalvin Cook MIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T8) 50.9&nbsp;</small><a style="cursor: pointer;"> C.J. Anderson DEN </a><small class="grey"> RB-20 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="C.J. Anderson DEN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T8) 51.1&nbsp;</small><a style="cursor: pointer;"> Mark Ingram NO </a><small class="grey"> RB-21 (vADP: +6.0)</small> <a href="#" class="" fp-player-name="Mark Ingram NO "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T9) 53.1&nbsp;</small><a style="cursor: pointer;"> Golden Tate DET </a><small class="grey"> WR-22 (vADP: +10.0)</small> <a href="#" class="" fp-player-name="Golden Tate DET "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T9) 53.5&nbsp;</small><a style="cursor: pointer;"> Spencer Ware KC </a><small class="grey"> RB-22 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="Spencer Ware KC "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T9) 53.9&nbsp;</small><a style="cursor: pointer;"> Greg Olsen CAR </a><small class="grey"> TE-3 (vADP: -2.0)</small> <a href="#" class="" fp-player-name="Greg Olsen CAR "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T9) 55.8&nbsp;</small><a style="cursor: pointer;"> Jordan Reed WAS </a><small class="grey"> TE-4 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Jordan Reed WAS "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T9) 56.2&nbsp;</small><a style="cursor: pointer;"> Emmanuel Sanders DEN </a><small class="grey"> WR-23 (vADP: +14.0)</small> <a href="#" class="" fp-player-name="Emmanuel Sanders DEN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T9) 57.4&nbsp;</small><a style="cursor: pointer;"> Larry Fitzgerald ARI </a><small class="grey"> WR-24 (vADP: +14.0)</small> <a href="#" class="" fp-player-name="Larry Fitzgerald ARI "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T10) 58.7&nbsp;</small><a style="cursor: pointer;"> Mike Gillislee NE </a><small class="grey"> RB-23 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Mike Gillislee NE "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T10) 58.9&nbsp;</small><a style="cursor: pointer;"> Jarvis Landry MIA </a><small class="grey"> WR-25 (vADP: -9.0)</small> <a href="#" class="" fp-player-name="Jarvis Landry MIA "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T10) 60.1&nbsp;</small><a style="cursor: pointer;"> Tyreek Hill KC </a><small class="grey"> WR-26 (vADP: -12.0)</small> <a href="#" class="" fp-player-name="Tyreek Hill KC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T10) 61.3&nbsp;</small><a style="cursor: pointer;"> Bilal Powell NYJ </a><small class="grey"> RB-24 (vADP: +17.0)</small> <a href="#" class="" fp-player-name="Bilal Powell NYJ "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T10) 61.5&nbsp;</small><a style="cursor: pointer;"> Martavis Bryant PIT </a><small class="grey"> WR-27 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Martavis Bryant PIT "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T10) 62.3&nbsp;</small><a style="cursor: pointer;"> Russell Wilson SEA </a><small class="grey"> QB-4 (vADP: -5.0)</small> <a href="#" class="" fp-player-name="Russell Wilson SEA "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T10) 63.0&nbsp;</small><a style="cursor: pointer;"> Eddie Lacy SEA </a><small class="grey"> RB-25 (vADP: +12.0)</small> <a href="#" class="" fp-player-name="Eddie Lacy SEA "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T11) 63.9&nbsp;</small><a style="cursor: pointer;"> Julian Edelman NE </a><small class="grey"> WR-28 (vADP: -4.0)</small> <a href="#" class="" fp-player-name="Julian Edelman NE "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T11) 64.3&nbsp;</small><a style="cursor: pointer;"> Tevin Coleman ATL </a><small class="grey"> RB-26 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Tevin Coleman ATL "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T11) 64.9&nbsp;</small><a style="cursor: pointer;"> Matt Ryan ATL </a><small class="grey"> QB-5 (vADP: -18.0)</small> <a href="#" class="" fp-player-name="Matt Ryan ATL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T11) 65.1&nbsp;</small><a style="cursor: pointer;"> Ameer Abdullah DET </a><small class="grey"> RB-27 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Ameer Abdullah DET "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T11) 65.5&nbsp;</small><a style="cursor: pointer;"> Frank Gore IND </a><small class="grey"> RB-28 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Frank Gore IND "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T11) 67.5&nbsp;</small><a style="cursor: pointer;"> Andrew Luck IND </a><small class="grey"> QB-6 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Andrew Luck IND "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T11) 67.7&nbsp;</small><a style="cursor: pointer;"> Jamison Crowder WAS </a><small class="grey"> WR-29 (vADP: +15.0)</small> <a href="#" class="" fp-player-name="Jamison Crowder WAS "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T11) 68.0&nbsp;</small><a style="cursor: pointer;"> Jimmy Graham SEA </a><small class="grey"> TE-5 (vADP: -13.0)</small> <a href="#" class="" fp-player-name="Jimmy Graham SEA "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T12) 71.4&nbsp;</small><a style="cursor: pointer;"> Willie Snead NO </a><small class="grey"> WR-30 (vADP: +12.0)</small> <a href="#" class="" fp-player-name="Willie Snead NO "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T12) 71.8&nbsp;</small><a style="cursor: pointer;"> Kelvin Benjamin CAR </a><small class="grey"> WR-31 (vADP: 0)</small> <a href="#" class="" fp-player-name="Kelvin Benjamin CAR "></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T12) 71.8&nbsp;</small><a style="cursor: pointer;"> Stefon Diggs MIN </a><small class="grey"> WR-32 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Stefon Diggs MIN "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T12) 74.3&nbsp;</small><a style="cursor: pointer;"> Tyler Eifert CIN </a><small class="grey"> TE-6 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Tyler Eifert CIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T12) 74.7&nbsp;</small><a style="cursor: pointer;"> LeGarrette Blount PHI </a><small class="grey"> RB-29 (vADP: -13.0)</small> <a href="#" class="" fp-player-name="LeGarrette Blount PHI "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T12) 74.8&nbsp;</small><a style="cursor: pointer;"> Donte Moncrief IND </a><small class="grey"> WR-33 (vADP: +10.0)</small> <a href="#" class="" fp-player-name="Donte Moncrief IND "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T12) 73.8&nbsp;</small><a style="cursor: pointer;"> Paul Perkins NYG </a><small class="grey"> RB-30 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Paul Perkins NYG "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T12) 76.3&nbsp;</small><a style="cursor: pointer;"> Brandon Marshall NYG </a><small class="grey"> WR-34 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Brandon Marshall NYG "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T13) 79.0&nbsp;</small><a style="cursor: pointer;"> Danny Woodhead BAL </a><small class="grey"> RB-31 (vADP: +14.0)</small> <a href="#" class="" fp-player-name="Danny Woodhead BAL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T13) 79.3&nbsp;</small><a style="cursor: pointer;"> Adrian Peterson NO </a><small class="grey"> RB-32 (vADP: -14.0)</small> <a href="#" class="" fp-player-name="Adrian Peterson NO "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T13) 79.4&nbsp;</small><a style="cursor: pointer;"> Kirk Cousins WAS </a><small class="grey"> QB-7 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Kirk Cousins WAS "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T13) 80.4&nbsp;</small><a style="cursor: pointer;"> DeSean Jackson TB </a><small class="grey"> WR-35 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="DeSean Jackson TB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T13) 84.2&nbsp;</small><a style="cursor: pointer;"> Marcus Mariota TEN </a><small class="grey"> QB-8 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Marcus Mariota TEN "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T14) 85.9&nbsp;</small><a style="cursor: pointer;"> Jameis Winston TB </a><small class="grey"> QB-9 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Jameis Winston TB "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T14) 87.3&nbsp;</small><a style="cursor: pointer;"> Pierre Garcon SF </a><small class="grey"> WR-36 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Pierre Garcon SF "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T14) 87.5&nbsp;</small><a style="cursor: pointer;"> Kyle Rudolph MIN </a><small class="grey"> TE-7 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Kyle Rudolph MIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T14) 87.7&nbsp;</small><a style="cursor: pointer;"> Doug Martin TB </a><small class="grey"> RB-33 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Doug Martin TB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T14) 88.1&nbsp;</small><a style="cursor: pointer;"> Cam Newton CAR </a><small class="grey"> QB-10 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="Cam Newton CAR "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T14) 89.4&nbsp;</small><a style="cursor: pointer;"> Delanie Walker TEN </a><small class="grey"> TE-8 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Delanie Walker TEN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T14) 91.7&nbsp;</small><a style="cursor: pointer;"> Eric Decker TEN </a><small class="grey"> WR-37 (vADP: +5.0)</small> <a href="#" class="" fp-player-name="Eric Decker TEN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T14) 91.6&nbsp;</small><a style="cursor: pointer;"> Terrance West BAL </a><small class="grey"> RB-34 (vADP: +25.0)</small> <a href="#" class="" fp-player-name="Terrance West BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T15) 95.5&nbsp;</small><a style="cursor: pointer;"> Jeremy Maclin BAL </a><small class="grey"> WR-38 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Jeremy Maclin BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T15) 95.7&nbsp;</small><a style="cursor: pointer;"> Devante Parker MIA </a><small class="grey"> WR-39 (vADP: +17.0)</small> <a href="#" class="" fp-player-name="Devante Parker MIA "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T15) 96.5&nbsp;</small><a style="cursor: pointer;"> Derek Carr OAK </a><small class="grey"> QB-11 (vADP: -23.0)</small> <a href="#" class="" fp-player-name="Derek Carr OAK "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T15) 97.0&nbsp;</small><a style="cursor: pointer;"> Jonathan Stewart CAR </a><small class="grey"> RB-35 (vADP: +6.0)</small> <a href="#" class="" fp-player-name="Jonathan Stewart CAR "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T15) 97.2&nbsp;</small><a style="cursor: pointer;"> Ben Roethlisberger PIT </a><small class="grey"> QB-12 (vADP: -4.0)</small> <a href="#" class="" fp-player-name="Ben Roethlisberger PIT "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T15) 97.0&nbsp;</small><a style="cursor: pointer;"> Tyrell Williams LAC </a><small class="grey"> WR-40 (vADP: +30.0)</small> <a href="#" class="" fp-player-name="Tyrell Williams LAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T15) 97.4&nbsp;</small><a style="cursor: pointer;"> Robert Kelley WAS </a><small class="grey"> RB-36 (vADP: -4.0)</small> <a href="#" class="" fp-player-name="Robert Kelley WAS "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T16) 99.5&nbsp;</small><a style="cursor: pointer;"> Derrick Henry TEN </a><small class="grey"> RB-37 (vADP: -14.0)</small> <a href="#" class="" fp-player-name="Derrick Henry TEN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T16) 99.9&nbsp;</small><a style="cursor: pointer;"> Cameron Meredith CHI </a><small class="grey"> WR-41 (vADP: -1.0)</small> <a href="#" class="" fp-player-name="Cameron Meredith CHI "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T16) 101.1&nbsp;</small><a style="cursor: pointer;"> Martellus Bennett GB </a><small class="grey"> TE-9 (vADP: -13.0)</small> <a href="#" class="" fp-player-name="Martellus Bennett GB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T16) 102.4&nbsp;</small><a style="cursor: pointer;"> Dak Prescott DAL </a><small class="grey"> QB-13 (vADP: -12.0)</small> <a href="#" class="" fp-player-name="Dak Prescott DAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T16) 101.3&nbsp;</small><a style="cursor: pointer;"> John Brown ARI </a><small class="grey"> WR-42 (vADP: +16.0)</small> <a href="#" class="" fp-player-name="John Brown ARI "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T16) 103.0&nbsp;</small><a style="cursor: pointer;"> Kenny Britt CLE </a><small class="grey"> WR-43 (vADP: +20.0)</small> <a href="#" class="" fp-player-name="Kenny Britt CLE "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T16) 103.4&nbsp;</small><a style="cursor: pointer;"> Zach Ertz PHI </a><small class="grey"> TE-10 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Zach Ertz PHI "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T17) 104.4&nbsp;</small><a style="cursor: pointer;"> Philip Rivers LAC </a><small class="grey"> QB-14 (vADP: +3.0)</small> <a href="#" class="" fp-player-name="Philip Rivers LAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T17) 105.5&nbsp;</small><a style="cursor: pointer;"> Theo Riddick DET </a><small class="grey"> RB-38 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Theo Riddick DET "></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T17) 105.6&nbsp;</small><a style="cursor: pointer;"> Eric Ebron DET </a><small class="grey"> TE-11 (vADP: +21.0)</small> <a href="#" class="" fp-player-name="Eric Ebron DET "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T17) 107.0&nbsp;</small><a style="cursor: pointer;"> Randall Cobb GB </a><small class="grey"> WR-44 (vADP: -11.0)</small> <a href="#" class="" fp-player-name="Randall Cobb GB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T17) 107.0&nbsp;</small><a style="cursor: pointer;"> Matthew Stafford DET </a><small class="grey"> QB-15 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Matthew Stafford DET "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T17) 107.4&nbsp;</small><a style="cursor: pointer;"> Matt Forte NYJ </a><small class="grey"> RB-39 (vADP: -3.0)</small> <a href="#" class="" fp-player-name="Matt Forte NYJ "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T17) 109.2&nbsp;</small><a style="cursor: pointer;"> Hunter Henry LAC </a><small class="grey"> TE-12 (vADP: -10.0)</small> <a href="#" class="" fp-player-name="Hunter Henry LAC "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T17) 108.3&nbsp;</small><a style="cursor: pointer;"> Jordan Matthews BUF </a><small class="grey"> WR-45 (vADP: +39.0)</small> <a href="#" class="" fp-player-name="Jordan Matthews BUF "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T17) 111.0&nbsp;</small><a style="cursor: pointer;"> Kareem Hunt KC </a><small class="grey"> RB-40 (vADP: -14.0)</small> <a href="#" class="" fp-player-name="Kareem Hunt KC "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T18) 113.5&nbsp;</small><a style="cursor: pointer;"> Tyrod Taylor BUF </a><small class="grey"> QB-16 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Tyrod Taylor BUF "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T18) 114.9&nbsp;</small><a style="cursor: pointer;"> Mike Wallace BAL </a><small class="grey"> WR-46 (vADP: +30.0)</small> <a href="#" class="" fp-player-name="Mike Wallace BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T18) 114.6&nbsp;</small><a style="cursor: pointer;"> Corey Coleman CLE </a><small class="grey"> WR-47 (vADP: -5.0)</small> <a href="#" class="" fp-player-name="Corey Coleman CLE "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T18) 116.6&nbsp;</small><a style="cursor: pointer;"> Samaje Perine WAS </a><small class="grey"> RB-41 (vADP: -21.0)</small> <a href="#" class="" fp-player-name="Samaje Perine WAS "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T18) 117.3&nbsp;</small><a style="cursor: pointer;"> Adam Thielen MIN </a><small class="grey"> WR-48 (vADP: +6.0)</small> <a href="#" class="" fp-player-name="Adam Thielen MIN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T18) 119.3&nbsp;</small><a style="cursor: pointer;"> Rishard Matthews TEN </a><small class="grey"> WR-49 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Rishard Matthews TEN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T18) 120.1&nbsp;</small><a style="cursor: pointer;"> Duke Johnson CLE </a><small class="grey"> RB-42 (vADP: +14.0)</small> <a href="#" class="" fp-player-name="Duke Johnson CLE "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T18) 119.5&nbsp;</small><a style="cursor: pointer;"> Andy Dalton CIN </a><small class="grey"> QB-17 (vADP: +27.0)</small> <a href="#" class="" fp-player-name="Andy Dalton CIN "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T19) 123.4&nbsp;</small><a style="cursor: pointer;"> Corey Davis TEN </a><small class="grey"> WR-50 (vADP: -18.0)</small> <a href="#" class="" fp-player-name="Corey Davis TEN "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T19) 123.6&nbsp;</small><a style="cursor: pointer;"> Jack Doyle IND </a><small class="grey"> TE-13 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="Jack Doyle IND "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T19) 122.8&nbsp;</small><a style="cursor: pointer;"> C.J. Prosise SEA </a><small class="grey"> RB-43 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="C.J. Prosise SEA "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T19) 123.3&nbsp;</small><a style="cursor: pointer;"> Eli Manning NYG </a><small class="grey"> QB-18 (vADP: -5.0)</small> <a href="#" class="" fp-player-name="Eli Manning NYG "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T19) 127.6&nbsp;</small><a style="cursor: pointer;"> Marvin Jones DET </a><small class="grey"> WR-51 (vADP: +7.0)</small> <a href="#" class="" fp-player-name="Marvin Jones DET "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 132.6&nbsp;</small><a style="cursor: pointer;"> James White NE </a><small class="grey"> RB-44 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="James White NE "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 133.1&nbsp;</small><a style="cursor: pointer;"> Latavius Murray MIN </a><small class="grey"> RB-45 (vADP: -15.0)</small> <a href="#" class="" fp-player-name="Latavius Murray MIN "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T20) 135.6&nbsp;</small><a style="cursor: pointer;"> Carson Palmer ARI </a><small class="grey"> QB-19 (vADP: +21.0)</small> <a href="#" class="" fp-player-name="Carson Palmer ARI "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 135.2&nbsp;</small><a style="cursor: pointer;"> Thomas Rawls SEA </a><small class="grey"> RB-46 (vADP: +8.0)</small> <a href="#" class="" fp-player-name="Thomas Rawls SEA "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 136.6&nbsp;</small><a style="cursor: pointer;"> Jeremy Hill CIN </a><small class="grey"> RB-47 (vADP: -2.0)</small> <a href="#" class="" fp-player-name="Jeremy Hill CIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 137.9&nbsp;</small><a style="cursor: pointer;"> Jacquizz Rodgers TB </a><small class="grey"> RB-48 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Jacquizz Rodgers TB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T20) 137.8&nbsp;</small><a style="cursor: pointer;"> Carson Wentz PHI </a><small class="grey"> QB-20 (vADP: +7.0)</small> <a href="#" class="" fp-player-name="Carson Wentz PHI "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T21) 144.2&nbsp;</small><a style="cursor: pointer;"> Ted Ginn NO </a><small class="grey"> WR-52 (vADP: +29.0)</small> <a href="#" class="" fp-player-name="Ted Ginn NO "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T20) 138.7&nbsp;</small><a style="cursor: pointer;"> Coby Fleener NO </a><small class="grey"> TE-14 (vADP: +30.0)</small> <a href="#" class="" fp-player-name="Coby Fleener NO "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T20) 139.4&nbsp;</small><a style="cursor: pointer;"> Darren Sproles PHI </a><small class="grey"> RB-49 (vADP: +25.0)</small> <a href="#" class="" fp-player-name="Darren Sproles PHI "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 145.7&nbsp;</small><a style="cursor: pointer;"> Denver Broncos </a><small class="grey"> DST-1 (vADP: -18.0)</small> <a href="#" class="" fp-player-name="Denver Broncos "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T21) 141.9&nbsp;</small><a style="cursor: pointer;"> Giovani Bernard CIN </a><small class="grey"> RB-50 (vADP: +38.0)</small> <a href="#" class="" fp-player-name="Giovani Bernard CIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T21) 142.6&nbsp;</small><a style="cursor: pointer;"> Jamaal Charles DEN </a><small class="grey"> RB-51 (vADP: -17.0)</small> <a href="#" class="" fp-player-name="Jamaal Charles DEN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T21) 142.4&nbsp;</small><a style="cursor: pointer;"> Jamaal Williams GB </a><small class="grey"> RB-52 (vADP: +4.0)</small> <a href="#" class="" fp-player-name="Jamaal Williams GB "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T21) 141.6&nbsp;</small><a style="cursor: pointer;"> Blake Bortles JAC </a><small class="grey"> QB-21 (vADP: +91.0)</small> <a href="#" class="" fp-player-name="Blake Bortles JAC "></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T21) 146.6&nbsp;</small><a style="cursor: pointer;"> Sterling Shepard NYG </a><small class="grey"> WR-53 (vADP: +5.0)</small> <a href="#" class="" fp-player-name="Sterling Shepard NYG "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 143.6&nbsp;</small><a style="cursor: pointer;"> Seattle Seahawks </a><small class="grey"> DST-2 (vADP: -16.0)</small> <a href="#" class="" fp-player-name="Seattle Seahawks "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T21) 148.0&nbsp;</small><a style="cursor: pointer;"> Jason Witten DAL </a><small class="grey"> TE-15 (vADP: +11.0)</small> <a href="#" class="" fp-player-name="Jason Witten DAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T22) 151.3&nbsp;</small><a style="cursor: pointer;"> Josh Doctson WAS </a><small class="grey"> WR-54 (vADP: +12.0)</small> <a href="#" class="" fp-player-name="Josh Doctson WAS "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T21) 146.3&nbsp;</small><a style="cursor: pointer;"> Houston Texans </a><small class="grey"> DST-3 (vADP: -14.0)</small> <a href="#" class="" fp-player-name="Houston Texans "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T22) 150.4&nbsp;</small><a style="cursor: pointer;"> Tyler Lockett SEA </a><small class="grey"> WR-55 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Tyler Lockett SEA "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T22) 153.8&nbsp;</small><a style="cursor: pointer;"> Darren McFadden DAL </a><small class="grey"> RB-53 (vADP: +39.0)</small> <a href="#" class="" fp-player-name="Darren McFadden DAL "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T22) 151.7&nbsp;</small><a style="cursor: pointer;"> Cameron Brate TB </a><small class="grey"> TE-16 (vADP: +28.0)</small> <a href="#" class="" fp-player-name="Cameron Brate TB "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T22) 150.1&nbsp;</small><a style="cursor: pointer;"> Kansas City Chiefs </a><small class="grey"> DST-4 (vADP: -29.0)</small> <a href="#" class="" fp-player-name="Kansas City Chiefs "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T22) 155.4&nbsp;</small><a style="cursor: pointer;"> Breshad Perriman BAL </a><small class="grey"> WR-56 (vADP: +24.0)</small> <a href="#" class="" fp-player-name="Breshad Perriman BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T22) 153.7&nbsp;</small><a style="cursor: pointer;"> Kevin White CHI </a><small class="grey"> WR-57 (vADP: +1.0)</small> <a href="#" class="" fp-player-name="Kevin White CHI "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T22) 156.0&nbsp;</small><a style="cursor: pointer;"> Kenny Stills MIA </a><small class="grey"> WR-58 (vADP: +43.0)</small> <a href="#" class="" fp-player-name="Kenny Stills MIA "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T22) 156.4&nbsp;</small><a style="cursor: pointer;"> C.J. Fiedorowicz HOU </a><small class="grey"> TE-17 (vADP: +101.0)</small> <a href="#" class="" fp-player-name="C.J. Fiedorowicz HOU "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T23) 158.4&nbsp;</small><a style="cursor: pointer;"> Austin Hooper ATL </a><small class="grey"> TE-18 (vADP: +26.0)</small> <a href="#" class="" fp-player-name="Austin Hooper ATL "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T22) 157.4&nbsp;</small><a style="cursor: pointer;"> Julius Thomas MIA </a><small class="grey"> TE-19 (vADP: +15.0)</small> <a href="#" class="" fp-player-name="Julius Thomas MIA "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T23) 162.6&nbsp;</small><a style="cursor: pointer;"> Robert Woods LAR </a><small class="grey"> WR-59 (vADP: +71.0)</small> <a href="#" class="" fp-player-name="Robert Woods LAR "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T23) 163.5&nbsp;</small><a style="cursor: pointer;"> Zay Jones BUF </a><small class="grey"> WR-60 (vADP: +8.0)</small> <a href="#" class="" fp-player-name="Zay Jones BUF "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T23) 158.7&nbsp;</small><a style="cursor: pointer;"> Minnesota Vikings </a><small class="grey"> DST-5 (vADP: -20.0)</small> <a href="#" class="" fp-player-name="Minnesota Vikings "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T23) 163.4&nbsp;</small><a style="cursor: pointer;"> Antonio Gates LAC </a><small class="grey"> TE-20 (vADP: +12.0)</small> <a href="#" class="" fp-player-name="Antonio Gates LAC "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T23) 160.6&nbsp;</small><a style="cursor: pointer;"> Arizona Cardinals </a><small class="grey"> DST-6 (vADP: -18.0)</small> <a href="#" class="" fp-player-name="Arizona Cardinals "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 169.3&nbsp;</small><a style="cursor: pointer;"> J.J. Nelson ARI </a><small class="grey"> WR-61 (vADP: +37.0)</small> <a href="#" class="" fp-player-name="J.J. Nelson ARI "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T23) 164.5&nbsp;</small><a style="cursor: pointer;"> Joe Flacco BAL </a><small class="grey"> QB-22 (vADP: +60.0)</small> <a href="#" class="" fp-player-name="Joe Flacco BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 169.6&nbsp;</small><a style="cursor: pointer;"> Marqise Lee JAC </a><small class="grey"> WR-62 (vADP: +50.0)</small> <a href="#" class="" fp-player-name="Marqise Lee JAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 168.9&nbsp;</small><a style="cursor: pointer;"> Joe Williams SF </a><small class="grey"> RB-54 (vADP: -16.0)</small> <a href="#" class="" fp-player-name="Joe Williams SF "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 171.7&nbsp;</small><a style="cursor: pointer;"> Alvin Kamara NO </a><small class="grey"> RB-55 (vADP: +79.0)</small> <a href="#" class="" fp-player-name="Alvin Kamara NO "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 169.8&nbsp;</small><a style="cursor: pointer;"> Dion Lewis NE </a><small class="grey"> RB-56 (vADP: +63.0)</small> <a href="#" class="" fp-player-name="Dion Lewis NE "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 174.2&nbsp;</small><a style="cursor: pointer;"> Cole Beasley DAL </a><small class="grey"> WR-63 (vADP: +10.0)</small> <a href="#" class="" fp-player-name="Cole Beasley DAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 172.9&nbsp;</small><a style="cursor: pointer;"> Robby Anderson NYJ </a><small class="grey"> WR-64 (vADP: +19.0)</small> <a href="#" class="" fp-player-name="Robby Anderson NYJ "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T24) 169.1&nbsp;</small><a style="cursor: pointer;"> New England Patriots </a><small class="grey"> DST-7 (vADP: -35.0)</small> <a href="#" class="" fp-player-name="New England Patriots "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 176.6&nbsp;</small><a style="cursor: pointer;"> John Ross CIN </a><small class="grey"> WR-65 (vADP: -29.0)</small> <a href="#" class="" fp-player-name="John Ross CIN "></a></li>
+								<li class="listitem1"><img src=images/kickerbt.png height=20px><small class="grey"> (T24) 174.6&nbsp;</small><a style="cursor: pointer;"> Justin Tucker BAL </a><small class="grey"> K-1 (vADP: -60.0)</small> <a href="#" class="" fp-player-name="Justin Tucker BAL "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T24) 173.9&nbsp;</small><a style="cursor: pointer;"> Taylor Gabriel ATL </a><small class="grey"> WR-66 (vADP: -19.0)</small> <a href="#" class="" fp-player-name="Taylor Gabriel ATL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 175.2&nbsp;</small><a style="cursor: pointer;"> DeAndre Washington OAK </a><small class="grey"> RB-57 (vADP: +35.0)</small> <a href="#" class="" fp-player-name="DeAndre Washington OAK "></a></li>
+								<li class="listitem1"><img src=images/kickerbt.png height=20px><small class="grey"> (T24) 170.3&nbsp;</small><a style="cursor: pointer;"> Stephen Gostkowski NE </a><small class="grey"> K-2 (vADP: -65.0)</small> <a href="#" class="" fp-player-name="Stephen Gostkowski NE "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 176.1&nbsp;</small><a style="cursor: pointer;"> Rex Burkhead NE </a><small class="grey"> RB-58 (vADP: -7.0)</small> <a href="#" class="" fp-player-name="Rex Burkhead NE "></a></li>
+					 </ul> 
+			 </div> 
+				<div class="col-xs-12 col-lg-2 rowpadsmall"> 
+					 <ul class="list1"> 
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T24) 173.9&nbsp;</small><a style="cursor: pointer;"> Sam Bradford MIN </a><small class="grey"> QB-23 (vADP: +59.0)</small> <a href="#" class="" fp-player-name="Sam Bradford MIN "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 176.4&nbsp;</small><a style="cursor: pointer;"> Chris Thompson WAS </a><small class="grey"> RB-59 (vADP: +92.0)</small> <a href="#" class="" fp-player-name="Chris Thompson WAS "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T24) 175.8&nbsp;</small><a style="cursor: pointer;"> Marlon Mack IND </a><small class="grey"> RB-60 (vADP: -20.0)</small> <a href="#" class="" fp-player-name="Marlon Mack IND "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T24) 173.6&nbsp;</small><a style="cursor: pointer;"> Jay Cutler MIA </a><small class="grey"> QB-24 (vADP: +27.0)</small> <a href="#" class="" fp-player-name="Jay Cutler MIA "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T25) 179.2&nbsp;</small><a style="cursor: pointer;"> Allen Hurns JAC </a><small class="grey"> WR-67 (vADP: +12.0)</small> <a href="#" class="" fp-player-name="Allen Hurns JAC "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T25) 178.6&nbsp;</small><a style="cursor: pointer;"> Jonathan Williams BUF </a><small class="grey"> RB-61 (vADP: -24.0)</small> <a href="#" class="" fp-player-name="Jonathan Williams BUF "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T25) 180.2&nbsp;</small><a style="cursor: pointer;"> O.J. Howard TB </a><small class="grey"> TE-21 (vADP: -69.0)</small> <a href="#" class="" fp-player-name="O.J. Howard TB "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T25) 183.9&nbsp;</small><a style="cursor: pointer;"> Shane Vereen NYG </a><small class="grey"> RB-62 (vADP: +108.0)</small> <a href="#" class="" fp-player-name="Shane Vereen NYG "></a></li>
+								<li class="listitem1"><img src=images/quarterbackbt.png height=20px><small class="grey"> (T25) 177.9&nbsp;</small><a style="cursor: pointer;"> Alex Smith KC </a><small class="grey"> QB-25 (vADP: +56.0)</small> <a href="#" class="" fp-player-name="Alex Smith KC "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T25) 180.4&nbsp;</small><a style="cursor: pointer;"> Carolina Panthers </a><small class="grey"> DST-8 (vADP: -34.0)</small> <a href="#" class="" fp-player-name="Carolina Panthers "></a></li>
+								<li class="listitem1"><img src=images/kickerbt.png height=20px><small class="grey"> (T25) 180.8&nbsp;</small><a style="cursor: pointer;"> Dan Bailey DAL </a><small class="grey"> K-3 (vADP: -50.0)</small> <a href="#" class="" fp-player-name="Dan Bailey DAL "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T25) 180.3&nbsp;</small><a style="cursor: pointer;"> Charles Sims TB </a><small class="grey"> RB-63 (vADP: +38.0)</small> <a href="#" class="" fp-player-name="Charles Sims TB "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T26) 188.4&nbsp;</small><a style="cursor: pointer;"> D'Onta Foreman HOU </a><small class="grey"> RB-64 (vADP: +38.0)</small> <a href="#" class="" fp-player-name="D'Onta Foreman HOU "></a></li>
+								<li class="listitem1"><img src=images/runningbackbt.png height=20px><small class="grey"> (T26) 187.7&nbsp;</small><a style="cursor: pointer;"> Jalen Richard OAK </a><small class="grey"> RB-65 (vADP: -26.0)</small> <a href="#" class="" fp-player-name="Jalen Richard OAK "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T26) 190.1&nbsp;</small><a style="cursor: pointer;"> Anquan Boldin BUF </a><small class="grey"> WR-68 (vADP: +42.0)</small> <a href="#" class="" fp-player-name="Anquan Boldin BUF "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T26) 192.4&nbsp;</small><a style="cursor: pointer;"> Tavon Austin LAR </a><small class="grey"> WR-69 (vADP: +50.0)</small> <a href="#" class="" fp-player-name="Tavon Austin LAR "></a></li>
+								<li class="listitem1"><img src=images/kickerbt.png height=20px><small class="grey"> (T25) 182.6&nbsp;</small><a style="cursor: pointer;"> Matt Bryant ATL </a><small class="grey"> K-4 (vADP: -62.0)</small> <a href="#" class="" fp-player-name="Matt Bryant ATL "></a></li>
+								<li class="listitem1"><img src=images/defensebt.png height=20px><small class="grey"> (T25) 182.5&nbsp;</small><a style="cursor: pointer;"> New York Giants </a><small class="grey"> DST-9 (vADP: -48.0)</small> <a href="#" class="" fp-player-name="New York Giants "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T26) 187.3&nbsp;</small><a style="cursor: pointer;"> Jared Cook OAK </a><small class="grey"> TE-22 (vADP: +9.0)</small> <a href="#" class="" fp-player-name="Jared Cook OAK "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T26) 195.9&nbsp;</small><a style="cursor: pointer;"> Mohamed Sanu ATL </a><small class="grey"> WR-70 (vADP: +25.0)</small> <a href="#" class="" fp-player-name="Mohamed Sanu ATL "></a></li>
+								<li class="listitem1"><img src=images/kickerbt.png height=20px><small class="grey"> (T26) 186.6&nbsp;</small><a style="cursor: pointer;"> Mason Crosby GB </a><small class="grey"> K-5 (vADP: -23.0)</small> <a href="#" class="" fp-player-name="Mason Crosby GB "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T26) 189.7&nbsp;</small><a style="cursor: pointer;"> Will Fuller HOU </a><small class="grey"> WR-71 (vADP: +50.0)</small> <a href="#" class="" fp-player-name="Will Fuller HOU "></a></li>
+								<li class="listitem1"><img src=images/receiverbt.png height=20px><small class="grey"> (T26) 192.1&nbsp;</small><a style="cursor: pointer;"> Devin Funchess CAR </a><small class="grey"> WR-72 (vADP: +50.0)</small> <a href="#" class="" fp-player-name="Devin Funchess CAR "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T26) 192.1&nbsp;</small><a style="cursor: pointer;"> David Njoku CLE </a><small class="grey"> TE-23 (vADP: +18.0)</small> <a href="#" class="" fp-player-name="David Njoku CLE "></a></li>
+								<li class="listitem1"><img src=images/tightendbt.png height=20px><small class="grey"> (T26) 190.4&nbsp;</small><a style="cursor: pointer;"> Zach Miller CHI </a><small class="grey"> TE-24 (vADP: +75.0)</small> <a href="#" class="" fp-player-name="Zach Miller CHI "></a></li>
+					 </ul> 
+			 </div> 
+              </div><!--row-->
+            </div>
+        </div>
+        <div id="About" class="tabcontent">
+          <h4>About</h4></br></br>
+          <p2>This website is meant to serve as a draft aid for Fantasy Football. The website inludes an interactive draft sheet as well as overall and positional ranking-graphs.</p2></br>
+          <p2>Players are assigned tiers, for which players within a like-tier can be considered equals. This concept was expanded from Boris Chen's work, which can be found here (http://www.borischen.co/).</p2></br>
+          <p2>This program utilizes unsupervised machine learning by flat clustering with KMeans -- a simple way to uncover like tiers within the player data mined from FantasyPros (http://www.fantasypros.com/).</p2></br>
+        </div>
+        <div id="Overall" class="tabcontent">
+	      	<ul class="tab2">
+	          <li><a href="#" class="tablinks2 active2" onclick="openMinor(event, '1-60')">1-60</a></li>
+	          <li><a href="#" class="tablinks2" onclick="openMinor(event, '61-120')">61-120</a></li>
+	          <li><a href="#" class="tablinks2" onclick="openMinor(event, '121-200')">121-200</a></li>	          
+	        </ul>
+	        <div id="1-60" class="tabcontent2" style="display: block;">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-1.png"></li>
+	          </div>
+	        </div>
+	        <div id="61-120" class="tabcontent2">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-2.png"></li>
+	          </div>
+	        </div>
+	        <div id="121-200" class="tabcontent2">
+	          <div id="holder">
+	            <li><img src="images/preseason-overall-raw-3.png"></li>
+	          </div>
+	        </div>	        	        
+        </div>
+        <div id="QB" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-qb-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="RB" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-rb-raw-1.png"></li>
+           </div>
+        </div>  
+        <div id="WR" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-wr-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="TE" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-te-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="DST" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-dst-raw-1.png"></li>
+           </div>
+        </div>
+        <div id="K" class="tabcontent">
+          <div id="holder">
+            <li><img src="images/preseason-k-raw-1.png"></li>
+           </div>
+        </div>              
+	    <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            function openMinor(evt2, minorName) {
+                var i, tabcontent2, tablinks2;
+                tabcontent2 = document.getElementsByClassName("tabcontent2");
+                for (i = 0; i < tabcontent2.length; i++) {
+                    tabcontent2[i].style.display = "none";
+                }
+                tablinks2 = document.getElementsByClassName("tablinks2");
+                for (i = 0; i < tablinks2.length; i++) {
+                    tablinks2[i].className = tablinks2[i].className.replace(" active2", "");
+                }
+                document.getElementById(minorName).style.display = "block";
+                evt2.currentTarget.className += " active2";
+            }
+
+            //Adjusts outline based on color
+			$("li:contains('(vADP: -')").css({'color':"#006600"})
+			$("li:contains('(vADP: 0)')").css({'color':"black"})
+			$("li:contains('(vADP: +')").css({'color':"#990000"})
+
+            //Adjusts outline based on color
+			$("li:contains('(T1)')").css({'background-color':"#a6cee3"})
+            $("li:contains('(T2)')").css({'background-color':'#1f78b4'})
+            $("li:contains('(T3)')").css({'background-color':'#b2df8a'})
+            $("li:contains('(T4)')").css({'background-color':'#33a02c'})
+            $("li:contains('(T5)')").css({'background-color':'#fb9a99'})
+            $("li:contains('(T6)')").css({'background-color':'#e31a1c'})
+            $("li:contains('(T7)')").css({'background-color':'#fdbf6f'})
+            $("li:contains('(T8)')").css({'background-color':'#ff7f00'})
+            $("li:contains('(T9)')").css({'background-color':'#cab2d6'})
+            $("li:contains('(T10)')").css({'background-color':'#6a3d9a'})
+            $("li:contains('(T11)')").css({'background-color':'#ffff99'})
+            $("li:contains('(T12)')").css({'background-color':'#b15928'})
+            $("li:contains('(T13)')").css({'background-color':'#8dd3c7'})
+            $("li:contains('(T14)')").css({'background-color':'#ffffb3'})
+            $("li:contains('(T15)')").css({'background-color':'#bebada'})
+            $("li:contains('(T16)')").css({'background-color':'#fb8072'})
+            $("li:contains('(T17)')").css({'background-color':'#80b1d3'})
+            $("li:contains('(T18)')").css({'background-color':'#fdb462'})
+            $("li:contains('(T19)')").css({'background-color':'#b3de69'})
+            $("li:contains('(T20)')").css({'background-color':'#fccde5'})
+            $("li:contains('(T21)')").css({'background-color':'#d9d9d9'})
+            $("li:contains('(T22)')").css({'background-color':'#bc80bd'})
+            $("li:contains('(T23)')").css({'background-color':'#ccebc5'})
+            $("li:contains('(T24)')").css({'background-color':'#ffed6f'})
+            $("li:contains('(T25)')").css({'background-color':'#1f78b4'})
+            $("li:contains('(T26)')").css({'background-color':'#b2df8a'})
+            $("li:contains('(T27)')").css({'background-color':'#33a02c'})
+            $("li:contains('(T28)')").css({'background-color':'#fb9a99'})
+
+	    	//Assigns player position class to the list item containing the string
+			$("li:contains('WR-')").addClass("receiver");
+			$("li:contains('RB-')").addClass("rback");
+			$("li:contains('QB-')").addClass("qback");
+			$("li:contains('TE-')").addClass("tend");
+			$("li:contains('DST-')").addClass("dst");
+			$("li:contains('K-')").addClass("kicker");
+
+			//Toggles classes of list items on click eventsf
+		    $(".listitem1").click(function(e){
+        	 $(this).toggleClass('listitem2'); 
+   		    });
+   		 	$(".listitem1").dblclick(function(f){
+        		$(this).toggleClass('listitem3'); 
+	   		});
+
+	   		$(".quarterbackbt").click(function(g){
+
+	   			   			$("li:contains('QB')").toggleClass("hiddenbt");
+	   			   			$(".quarterbackbt").toggleClass("btshrink");
+	   			   			
+	   			});
+	   		$(".runningbackbt").click(function(g){
+	   						
+	   			   			$("li:contains('RB')").toggleClass("hiddenbt");
+	   			   			$(".runningbackbt").toggleClass("btshrink");
+	   			   			
+	   			});
+	   		$(".tightendbt").click(function(g){
+
+	   			   			$("li:contains('TE')").toggleClass("hiddenbt");
+	   			   			$(".tightendbt").toggleClass("btshrink");
+	   			});
+	   		$(".receiverbt").click(function(g){
+
+	   			   			$("li:contains('WR')").toggleClass("hiddenbt");
+	   			   			$(".receiverbt").toggleClass("btshrink");
+	   			});
+	   			   			
+	   			
+	   		$(".defensebt").click(function(g){
+
+	   			   			$("li:contains('DST')").toggleClass("hiddenbt");
+	   			   			$(".defensebt").toggleClass("btshrink");
+	   			});
+
+	   		$(".kickerbt").click(function(g){
+
+	   			   			$("li:contains('K')").toggleClass("hiddenbt");
+	   			   			$(".kickerbt").toggleClass("btshrink");
+	   			});
+
+
+	   		var wrap = $("#wrap");
+
+			$(window).on("scroll", function() {
+    
+			  if ($(window).scrollTop() > 50) {
+			    wrap.addClass("positionsbartop");
+			  } else {
+			    wrap.removeClass("positionsbartop");
+			 }
+				});	   						
+	    </script>
+	      <!-- jQuery first, then Tether, then Bootstrap JS. -->
+		
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+		
+  </body>
+
+</html>
