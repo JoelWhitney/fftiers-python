@@ -92,7 +92,7 @@ border-top: none;
 
 /* draft sheet stuff */
 .listitem1 {
-background-color: #758AA8;
+background-color: #c2c7ce;
 /*margin-left: -20px;*/
 margin-top: 2px;
 text-align: left;
@@ -119,32 +119,32 @@ background-color: #151515;
 {
 border-color: #FFC288;
 border-style: solid;
-border-width: 0.5px;
+border-width: 0.75px;
 }
 .receiver {
 border-color: #69DC32;
 border-style: solid;
-border-width: 0.5px;
+border-width: 1.5px;
 }
 .rback {
 border-color: #44A0B1;
 border-style: solid;
-border-width: 0.5px;
+border-width: 1.5px;
 }
 .qback {
 border-color: #EC365A;
 border-style: solid;
-border-width: 0.5px;
+border-width: 1.5px;
 }
 .dst {
 border-color: #FF8422;
 border-style: solid;
-border-width: 0.5px;
+border-width: 1.5px;
 }
 .kicker {
 border-color: #DDB7F0;
 border-style: solid;
-border-width: 0.5px;
+border-width: 1.5px;
 }
 .kickerbts {
 }

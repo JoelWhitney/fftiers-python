@@ -22,6 +22,9 @@ Run from command line
 Note: The token can be found by searching the FantasyPros Login page source for 'csrfmiddlewaretoken'
 
 `cd "<directory_python_file>" && py -3 "ff-tiers.py" -u "<FantasyPros_username>" -p "<FantasyPros_password>" -t "<FantasyPros_token>"`
+`cd "/Users/joel8641/Box Sync/Projects/GitHub/fftiers-python/src" && py -3 "ff-tiers.py" -u "whitneyjb5" -p "999jbw" -t "reiHrx0n5o7YstOIFsZ5Gj29UVuuC80z"`
+`cd "/Users/joel8641/Box Sync/Projects/GitHub/fftiers-python/src" && python3.5 "ff-tiers.py" -u "whitneyjb5" -p "999jbw" -t "reiHrx0n5o7YstOIFsZ5Gj29UVuuC80z"`
+
 
 **To do**
 - Output to CSV with tiers

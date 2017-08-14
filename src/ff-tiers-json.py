@@ -284,6 +284,8 @@ def lists_from_csv(position, week, data_directory):
             # set up csv file to read
             with open(full_file_name, 'r') as csv_file:
                 csv_reader = csv.reader(csv_file)
+                next(csv_reader)
+                next(csv_reader)
                 # iterate over each row adding column to appropriate list
                 for row in csv_reader:
                     rank_list.append(int(row[0]))
@@ -372,7 +374,6 @@ def plot(position, week, args):
     # get preseason settings
     if week == 0:
         list_of_lists = lists_from_csv(position, week, data_directory)
-        tiers = []
         # split lists for pos == overall
         if position == 'preseason-overall':
             for dict in type_cluster_settings:
@@ -395,12 +396,9 @@ def plot(position, week, args):
                     plot_list_of_lists = [sub_plot_1, sub_plot_2, sub_plot_3]
                     logger.debug("Getting ready to cluster and plot for {}".format(position.upper()))
                     labels = cluster_and_plot(plot_list_of_lists, plot_filename, title, args)
-                    print(labels)
                     # create draft sheet
                     unordered_labels = [labels[start1:stop1], labels[start2:stop2], labels[start3:stop3]]
-                    print(unordered_labels)
                     ordered_labels = reorder_labels(unordered_labels)
-                    print(ordered_labels)
                     # truncate lists for website
                     web_list_of_lists = []
                     for list in list_of_lists: web_list_of_lists.append(list[start1:stop3])
@@ -621,15 +619,15 @@ def ffb_draft_sheet(args, list_of_lists):
         for e in range(6): starts.append(int(e * players_per_column))
         stops = []
         for f in range(6): stops.append(starts[f] + players_per_column)
-        print(list_of_lists)
+
         for i in range(6):
             destination_html_file.write(div_start)
             rank_list, name_list, position_list, average_rank_list, vs_adp_list, ordered_labels = list_of_lists[0][starts[i]:stops[i]], \
                                                                                                   list_of_lists[1][starts[i]:stops[i]], \
                                                                                                   list_of_lists[2][starts[i]:stops[i]], \
                                                                                                   list_of_lists[3][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[5][starts[i]:stops[i]], \
-                                                                                                  list_of_lists[6][starts[i]:stops[i]]
+                                                                                                  list_of_lists[4][starts[i]:stops[i]], \
+                                                                                                  list_of_lists[5][starts[i]:stops[i]]
             print(name_list)
             for n in range(len(rank_list)):
                 formatted_ranking = float("{0:.2f}".format(average_rank_list[n]))
@@ -642,7 +640,6 @@ def ffb_draft_sheet(args, list_of_lists):
                     vs_adp_str = '-' + str(abs(vs_adp_list[n])) if vs_adp_list[n] < 0 else '+' + str(vs_adp_list[n])
                 else:
                     vs_adp_str = ''
-                print(ordered_labels[n])
                 player_info = '\t\t\t\t\t\t\t\t<li class="listitem1"><img src={} height=20px><small class="grey"> (T{}) {}&nbsp;</small><a style=' \
                               '"cursor: pointer;"> {}</a><small class="grey"> {}-{} (vADP: {})</small> <a href="#" class="" fp-player-name="{}"></a></li>\n'.format(position_image, ordered_labels[n], formatted_ranking, name_list[n],  raw_position, position_rank, vs_adp_str, name_list[n])
                 destination_html_file.write(player_info)
